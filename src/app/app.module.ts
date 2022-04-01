@@ -4,14 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { LancamentosFuturosComponent } from './lancamentos-futuros/lancamentos-futuros.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    LancamentosFuturosComponent
+    NavbarComponent
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule
