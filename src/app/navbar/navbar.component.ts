@@ -13,4 +13,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  conta =[
+    'ag 0123 c/c 00587-5'
+  ]
 }

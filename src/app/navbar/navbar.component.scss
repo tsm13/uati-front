@@ -1,42 +1,88 @@
 
-nav{
-    background-color: #EC7000;   
-}
 
-li, a {
-    font-family: sans-serif;
-    padding: 0px 20px;
-    color: #edf0f1;
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 
-nav ul a:hover {
-    background-color: rgba(0, 0, 0, 0) !important;
- }
-
-
-#ag:hover{
-    background-color: #FAF7F5 !important; 
+.itau{
+    height: 70px;
+    background-color: #EC7000;
 }
 
-#ag{
-    color: #EC7000;
-    font-weight: 800;
-    background-color: #FAF7F5;
-    border-radius: 5px;
-    text-transform: lowercase;
-    cursor: default;
-}
-
-.lock{
-    max-width: 64px;
-    max-height: 64px;  
-}
-
-header{
+.nav-itau{
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
+
+a{
+    all: initial !important;
+    cursor: pointer !important;    
+}
+span, a{
+    font-family: sans-serif !important;
+    color: #edf0f1 !important;
+}
+
+#ag i{
+    all: initial !important;
+}
+
+#ag {
+    color: #EC7000 !important;
+    font-weight: 800 !important;
+    background-color: #edf0f1 !important;
+    border-radius: 5px !important;
+    width: 140px !important;
+    height: 34px !important;
+    font-size: 12px !important;
+    text-align: center !important;
+    padding: 8px 8px !important;
+    font-style: normal !important;
+}
+
+i{
+    display: block;
+}
+button{
+    color: #edf0f1;
+    background-color: #CD5A12;
+    cursor: pointer;   
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 70px;
+    height: 70px;
+}
+input {
+    all: initial !important;
+  }
+
+#search-bar{
+    background-color: #FFFFFF !important;
+    width: 460px !important;
+    border-radius: 20px !important;
+    height: 32px !important;
+}
+
+#txt-search{
+    font-weight: 400  !important;
+    background-color:transparent;
+    font-family: sans-serif !important;
+    color: #706A66 !important;
+    font-size: 12px !important;
+    padding: 6px !important;
+    padding-left: 22px !important;
+    border:none !important;
+    height: 18px !important;
+    width:420px !important;
+
+}
+
+
 .text-color{
     color: #EC7000;
 }
@@ -45,22 +91,23 @@ header{
  background-color: #FAF7F5;
 }
 
-
-.logo img{  
-    max-width: 51px;
-    max-height: 51px;
-    margin-top: 6px;
+.logo-itau img{  
+    width: 51px;
+    height: 51px;
 }
 
 .icon-large{
     font-size: 42px;
 }
 
-.logo{
-    margin-top: 12px;
-    margin-left: 12px;
-}
-
 .color-itau-dark{
     background-color: #CD5A12;
+}
+
+.btn-sair{
+    margin-right: 40px;
+}
+
+#menu{
+    margin-right: 32px;
 }
