@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 
-/* Tabela */
+
+/* Tabela Entradas/saídas */
 .tabela {
   margin: 16px 0;
 }
@@ -15,10 +16,6 @@ td, th {
   padding: 7.5px 2.5px;
 }
 
-::ng-deep div.mat-expansion-panel-body {
-  padding: 0;
-}
-
 
 /* Colunas */
 .col-data {
@@ -27,13 +24,13 @@ td, th {
 }
 
 .col-valor {
-  text-align: right;
   width: 15%;
+  text-align: right;
 }
 
 .col-saldo {
+  text-align: right;
   width: 15%;
-  visibility: hidden;
 }
 
 .col-detalhes {
@@ -42,19 +39,21 @@ td, th {
 }
 
 
-
 /* Texto */
 .entrada {
   text-align: right;
   color: #007a47;
   font-weight: 700;
-  padding-left: 34px !important;
 }
 
 .saida {
   color: #b71c1c;
   font-weight: 700;
-  min-width: 100px;
+  text-align: right;
+}
+
+.saldo {
+  font-weight: 700;
   text-align: right;
 }
 
@@ -63,7 +62,7 @@ td, th {
 }
 
 
-/* Outros Ajustes*/
+/* Outros Ajustes */
 .pl {
   padding-left: 2%;
 }
@@ -75,3 +74,24 @@ td, th {
 .add-border {
   border: 1px solid #efe9e5;
 }
+
+
+/* Footer */
+.atualizado {
+  margin: 48px 24px 0;
+}
+
+
+/* Outros */
+.info-icon {
+  color: #106EB0;
+  font-size: 20px;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+
+
+
