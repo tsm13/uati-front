@@ -22,9 +22,9 @@
 
     <div id="detalhe"></div>
 
-    <div id="dvButton" fxLayout="row" fxLayoutAlign="end center">
+    <div id="dvButton">
       <button mat-icon-button (click)="hide()" *ngIf="toDisplay; else oculto" >
-        <div class="btn">
+        <div class="botao">
           <div id="idIcon">
             <mat-icon>visibility</mat-icon>
           </div>
@@ -36,7 +36,7 @@
 
       <ng-template #oculto>
         <button mat-icon-button (click)="hide()">
-          <div class="btn">
+          <div class="botao">
             <div id="idIcon">
               <mat-icon>visibility_off</mat-icon>
             </div>
