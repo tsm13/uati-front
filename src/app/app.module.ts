@@ -13,12 +13,19 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
+import { LancamentosFuturosComponent } from './lancamentos-futuros/lancamentos-futuros.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { EntradasSaidasComponent } from './entradas-saidas/entradas-saidas/entradas-saidas.component';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    AppSaldoComponent
+    AppSaldoComponent,
+    LancamentosFuturosComponent,
+    EntradasSaidasComponent
   ],
 
   imports: [
@@ -27,9 +34,13 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     NoopAnimationsModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    BrowserAnimationsModule,
+    MatExpansionModule,
+    MatIconModule,
+    CdkAccordionModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
