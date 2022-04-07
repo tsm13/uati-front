@@ -1,64 +1,51 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <app-navbar></app-navbar>
-  <div class="container">
-    <app-saldo></app-saldo>
-    <div class="lancamentos">
-      <mat-accordion>
-        <mat-expansion-panel
-          (opened)="lancamentosFuturosAberto = true"
-          (closed)="lancamentosFuturosAberto = false"
-        >
-          <mat-expansion-panel-header>
-            <mat-panel-title>lançamentos futuros</mat-panel-title>
-            <mat-panel-description
-              class="toggle-exibir lancamentos-futuros-borderless"
-            >
-              {{ lancamentosFuturosAberto ? "ocultar" : "exibir" }}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <app-lancamentos-futuros></app-lancamentos-futuros>
-        </mat-expansion-panel>
-      </mat-accordion>
-      <app-entradas-saidas></app-entradas-saidas>
-    </div>
-  
-    <ul class="footer">
-      <li>
-        Os saldos acima são baseados nas informações disponíveis até esse instante
-        e poderão ser alteradas a qualquer momento em função de novos lançamentos.
-      </li>
-      <li>
-        Operações pós-fixadas: valor merante indicativo. O valor do débito será
-        determinado na data de liquidação das operações, conforme contratado.
-      </li>
-      <li>
-        Consulte a última versão das Condições Gerais da sua Conta Universal Itaú
-        e dos Serviços no site
-        <a href="www.itau.com.br/conta-corrente/conveniencia"
-          >www.itau.com.br/conta-corrente/conveniencia</a
-        >
-      </li>
-  
-      <li>
-        Conforme Resolução 4.292/13 do CMN/BACEN, as operações de crédito podem
-        ser transferidas para outra instituição financeira por meio da
-        Portabilidade.
-      </li>
-  
-      Para maiores informações, consulte:
-      <a href="www.itau.com.br">www.itau.com.br</a>
-      no menu: Serviços > Portabilidade de crédito.
-    </ul>
+<app-navbar></app-navbar>
+<div class="container">
+  <app-saldo></app-saldo>
+  <div class="lancamentos">
+    <mat-accordion>
+      <mat-expansion-panel
+        (opened)="lancamentosFuturosAberto = true"
+        (closed)="lancamentosFuturosAberto = false"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>lançamentos futuros</mat-panel-title>
+          <mat-panel-description
+            class="toggle-exibir lancamentos-futuros-borderless"
+          >
+            {{ lancamentosFuturosAberto ? "ocultar" : "exibir" }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-lancamentos-futuros></app-lancamentos-futuros>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <app-entradas-saidas></app-entradas-saidas>
   </div>
-</body>
-</html>
 
+  <ul class="footer">
+    <li>
+      Os saldos acima são baseados nas informações disponíveis até esse instante
+      e poderão ser alteradas a qualquer momento em função de novos lançamentos.
+    </li>
+    <li>
+      Operações pós-fixadas: valor merante indicativo. O valor do débito será
+      determinado na data de liquidação das operações, conforme contratado.
+    </li>
+    <li>
+      Consulte a última versão das Condições Gerais da sua Conta Universal Itaú
+      e dos Serviços no site
+      <a href="www.itau.com.br/conta-corrente/conveniencia"
+        >www.itau.com.br/conta-corrente/conveniencia</a
+      >
+    </li>
+
+    <li>
+      Conforme Resolução 4.292/13 do CMN/BACEN, as operações de crédito podem
+      ser transferidas para outra instituição financeira por meio da
+      Portabilidade.
+    </li>
+
+    Para maiores informações, consulte:
+    <a href="www.itau.com.br">www.itau.com.br</a>
+    no menu: Serviços > Portabilidade de crédito.
+  </ul>
+</div>
