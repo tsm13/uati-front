@@ -1,6 +1,6 @@
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button'
-import { MatCardModule } from '@angular/material/card'
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppSaldoComponent } from './app-saldo/app-saldo.component';
 
@@ -12,11 +12,10 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-
 import { LancamentosFuturosComponent } from './lancamentos-futuros/lancamentos-futuros.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { EntradasSaidasComponent } from './entradas-saidas/entradas-saidas/entradas-saidas.component';
+import { EntradasSaidasComponent } from './entradas-saidas/entradas-saidas.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { RodapeComponent } from './rodape/rodape.component';
 
@@ -27,7 +26,7 @@ import { RodapeComponent } from './rodape/rodape.component';
     AppSaldoComponent,
     LancamentosFuturosComponent,
     EntradasSaidasComponent,
-    RodapeComponent
+    RodapeComponent,
   ],
 
   imports: [
@@ -40,7 +39,7 @@ import { RodapeComponent } from './rodape/rodape.component';
     BrowserAnimationsModule,
     MatExpansionModule,
     MatIconModule,
-    CdkAccordionModule
+    CdkAccordionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
