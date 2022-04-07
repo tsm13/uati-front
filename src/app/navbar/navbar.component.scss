@@ -12,14 +12,36 @@
 }
 
 .nav-itau {
-  display: inline-flex;
   align-items: center;
+  display: inline-flex;
   width: 1080px;
 }
 
 a.nav-itau {
   all: initial;
   cursor: pointer;
+}
+
+button {
+  color: #ffffff;
+  background-color: #cd5a12;
+  cursor: pointer;
+  border: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 70px;
+  height: 70px;
+}
+
+.logo-itau {
+  margin-top: 5px;
+}
+
+.logo-itau img {
+  width: 51px;
+  height: 51px;
+  margin-inline-end: 42px;
+  margin-inline-start: 32px;
 }
 
 #ag i {
@@ -43,17 +65,6 @@ a.nav-itau {
 
 i {
   display: block;
-}
-
-button {
-  color: #ffffff;
-  background-color: #cd5a12;
-  cursor: pointer;
-  border: none;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  width: 70px;
-  height: 70px;
 }
 
 input {
@@ -89,16 +100,6 @@ input:focus {
   color: #ec7000;
 }
 
-.logo-itau {
-  margin-top: 5px;
-}
-.logo-itau img {
-  width: 51px;
-  height: 51px;
-  margin-inline-end: 42px;
-  margin-inline-start: 32px;
-}
-
 .icon-conta {
   font-size: 42px;
   color: #faf7f5;
@@ -113,6 +114,8 @@ input:focus {
 ul,
 li {
   all: initial;
+  font-size: 14px;
+  font-family: Arial;
 }
 
 ul.breadcrumb-itau {
@@ -121,7 +124,6 @@ ul.breadcrumb-itau {
 }
 ul.breadcrumb-itau li a {
   display: inline;
-  font-size: 14px;
 }
 ul.breadcrumb-itau li + li:before {
   padding: 8px;
