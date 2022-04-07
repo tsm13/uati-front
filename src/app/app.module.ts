@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { EntradasSaidasComponent } from './entradas-saidas/entradas-saidas/entradas-saidas.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { RodapeComponent } from './rodape/rodape.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
     NavbarComponent,
     AppSaldoComponent,
     LancamentosFuturosComponent,
-    EntradasSaidasComponent
+    EntradasSaidasComponent,
+    RodapeComponent
   ],
 
   imports: [
