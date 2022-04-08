@@ -3,22 +3,37 @@
   <table mat-table [dataSource]="dataSource" class="tabela striped">
     <ng-container matColumnDef="data">
       <th mat-header-cell *matHeaderCellDef>data</th>
-      <td mat-cell *matCellDef="let elemento">{{ elemento.data }}</td>
+      <td class="add-border" mat-cell *matCellDef="let elemento">
+        {{ elemento.data }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="lancamentos">
-      <th mat-header-cell *matHeaderCellDef>lancamentos</th>
-      <td mat-cell *matCellDef="let elemento">{{ elemento.lancamentos }}</td>
+      <th mat-header-cell *matHeaderCellDef>lançamentos</th>
+      <td class="lancamentos-titulo pl" mat-cell *matCellDef="let elemento">
+        {{ elemento.lancamentos }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="valor">
-      <th mat-header-cell *matHeaderCellDef>valor</th>
-      <td mat-cell *matCellDef="let elemento">{{ elemento.valor }}</td>
+      <th class="col-valor" mat-header-cell *matHeaderCellDef>valor (R$)</th>
+      <td
+        [ngClass]="{
+          entrada: elemento.valor.startsWith(''),
+          saida: elemento.valor.startsWith('-')
+        }"
+        mat-cell
+        *matCellDef="let elemento"
+      >
+        {{ elemento.valor }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="saldo">
-      <th mat-header-cell *matHeaderCellDef>saldo</th>
-      <td mat-cell *matCellDef="let elemento">{{ elemento.saldo }}</td>
+      <th mat-header-cell *matHeaderCellDef>saldo (R$)</th>
+      <td class="saldo pl" mat-cell *matCellDef="let elemento">
+        {{ elemento.saldo }}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="detalhes">
