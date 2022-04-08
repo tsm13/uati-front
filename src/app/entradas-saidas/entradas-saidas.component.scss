@@ -2,7 +2,6 @@
   box-sizing: border-box;
 }
 
-
 /* Tabela Entradas/saídas */
 .tabela {
   margin: 16px 0;
@@ -12,29 +11,32 @@ table.striped > tbody > tr:nth-child(odd) {
   background-color: #FAF7F5;
 }
 
-td, th {
-  padding: 7.5px 2.5px;
+tr.mat-header-row, tr.mat-row {
+  height: 32px !important;
 }
-
 
 /* Colunas */
-.col-data {
+.mat-column-data {
   width: 10%;
-  min-width: 120px;
+  min-width: 100px;
 }
 
-.col-valor {
+.mat-column-lancamentos {
+  padding-left: 2% !important;
+}
+
+.mat-column-valor {
   width: 15%;
-  text-align: right;
+  text-align: right !important;
 }
 
-.col-saldo {
-  text-align: right;
+.mat-column-saldo {
+  text-align: right !important;
   width: 15%;
 }
 
-.col-detalhes {
-  padding-left: 25px;
+.mat-column-detalhes {
+  padding-left: 25px !important;
   width: 15%;
 }
 
@@ -78,11 +80,11 @@ td, th {
 
 /* Footer */
 .atualizado {
-  margin: 48px 24px 0;
+  margin: 48px 24px 0 !important;
 }
 
 
-/* Outros */
+/* Outros ajustes */
 .info-icon {
   color: #106EB0;
   font-size: 20px;
@@ -90,6 +92,16 @@ td, th {
 
 .mat-expansion-panel-body {
   padding: 0 !important;
+}
+
+.mat-header-cell {
+  color: inherit;
+  font-size: inherit;
+  font-weight: normal;
+}
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type {
+  padding-left: 2% !important;
 }
 
 
