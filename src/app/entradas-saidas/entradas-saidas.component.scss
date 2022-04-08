@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 /* Tabela Entradas/saídas */
 .tabela {
   margin: 16px 0;
@@ -14,7 +18,7 @@ tr.mat-header-row, tr.mat-row {
 /* Colunas */
 .mat-column-data {
   width: 10%;
-  min-width: 120px;
+  min-width: 100px;
 }
 
 .mat-column-lancamentos {
@@ -76,7 +80,7 @@ tr.mat-header-row, tr.mat-row {
 
 /* Footer */
 .atualizado {
-  margin: 48px 24px 0;
+  margin: 48px 24px 0 !important;
 }
 
 
@@ -96,6 +100,9 @@ tr.mat-header-row, tr.mat-row {
   font-weight: normal;
 }
 
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type {
+  padding-left: 2% !important;
+}
 
 
 
