@@ -1,6 +1,7 @@
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppSaldoComponent } from './app-saldo/app-saldo.component';
 
@@ -39,6 +40,7 @@ import { RodapeComponent } from './rodape/rodape.component';
     BrowserAnimationsModule,
     MatExpansionModule,
     MatIconModule,
+    MatTableModule,
     CdkAccordionModule,
   ],
   providers: [],
