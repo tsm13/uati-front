@@ -9,12 +9,15 @@
   height: 70px;
   width: 100%;
   background-color: #ec7000;
+  display: flex;
+  justify-content: center;
 }
 
 .nav-itau {
   align-items: center;
   display: inline-flex;
-  width: 1080px;
+  justify-content: space-between;
+  width: 1420px;
 }
 
 a.nav-itau {
@@ -40,8 +43,6 @@ button {
 .logo-itau img {
   width: 51px;
   height: 51px;
-  margin-inline-end: 42px;
-  margin-inline-start: 32px;
 }
 
 #ag i {
@@ -54,7 +55,6 @@ button {
   border-radius: 5px;
   height: 34px;
   background-color: #faf7f5;
-  margin-inline-end: 31px;
 }
 .txt-ag {
   color: #ec7000;
@@ -103,8 +103,6 @@ input:focus {
 .icon-conta {
   font-size: 42px;
   color: #faf7f5;
-  margin-inline-start: 33px;
-  padding: 0%;
 }
 
 .color-itau-dark {
@@ -142,4 +140,11 @@ ul.breadcrumb-itau li a:hover {
 .container-2 {
   padding-top: 16px;
   margin-left: 10px;
+  width: 1420px;
+}
+
+.center-0 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
