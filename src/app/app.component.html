@@ -15,11 +15,24 @@
             {{ lancamentosFuturosAberto ? "ocultar" : "exibir" }}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <app-lancamentos-futuros></app-lancamentos-futuros>
+        <app-entradas-saidas
+          [titulo]="titleEntradasFuturas"
+          [dados]="entradasFuturas"
+          [colunas]="colunas"
+        ></app-entradas-saidas>
+        <app-entradas-saidas
+          [titulo]="titleSaidasFuturas"
+          [dados]="saidasFuturas"
+          [colunas]="colunas"
+        ></app-entradas-saidas>
       </mat-expansion-panel>
     </mat-accordion>
-    <app-entradas-saidas></app-entradas-saidas>
+    <app-entradas-saidas
+      [titulo]="titleEntradasSaidas"
+      [dados]="entradasSaidas"
+      [colunas]="colunas"
+    ></app-entradas-saidas>
+    <app-atualizado></app-atualizado>
   </div>
-
   <app-rodape></app-rodape>
 </div>
