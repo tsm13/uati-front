@@ -8,7 +8,7 @@
 }
 
 table.striped > tbody > tr:nth-child(odd) {
-  background-color: #FAF7F5;
+  background-color: #FAF7F5 !important;
 }
 
 tr.mat-header-row, tr.mat-row {
@@ -40,6 +40,10 @@ tr.mat-header-row, tr.mat-row {
   width: 15%;
 }
 
+.mat-column-vazia {
+  text-align: right !important;
+  width: 15%;
+}
 
 /* Texto */
 .entrada {
@@ -71,6 +75,10 @@ tr.mat-header-row, tr.mat-row {
 
 .b {
   font-weight: 700;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 .add-border {

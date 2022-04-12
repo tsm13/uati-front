@@ -15,23 +15,23 @@
             {{ lancamentosFuturosAberto ? "ocultar" : "exibir" }}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <app-entradas-saidas
+        <mat-tabela
           [titulo]="titleEntradasFuturas"
           [dados]="entradasFuturas"
-          [colunas]="colunas"
-        ></app-entradas-saidas>
-        <app-entradas-saidas
+          [colunas]="semSaldo"
+        ></mat-tabela>
+        <mat-tabela
           [titulo]="titleSaidasFuturas"
           [dados]="saidasFuturas"
-          [colunas]="colunas"
-        ></app-entradas-saidas>
+          [colunas]="semSaldo"
+        ></mat-tabela>
       </mat-expansion-panel>
     </mat-accordion>
-    <app-entradas-saidas
+    <mat-tabela
       [titulo]="titleEntradasSaidas"
       [dados]="entradasSaidas"
       [colunas]="colunas"
-    ></app-entradas-saidas>
+    ></mat-tabela>
     <app-atualizado></app-atualizado>
   </div>
   <app-rodape></app-rodape>
