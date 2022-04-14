@@ -9,11 +9,7 @@ import { DadosService } from './services/dados.service';
 export class AppComponent {
   title = 'itau';
   lancamentosFuturosAberto = false;
-  titleEntradasSaidas = 'entradas/saídas';
-  titleEntradasFuturas = 'entradas futuras';
-  titleSaidasFuturas = 'saídas futuras';
   colunas: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes'];
-  semSaldo: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes'];
 
   entradasSaidas = this.dadosService.getEntradasSaidas();
   entradasFuturas = this.dadosService.getEntradasFuturas();
