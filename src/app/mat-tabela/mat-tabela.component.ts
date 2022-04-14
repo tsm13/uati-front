@@ -1,22 +1,10 @@
-import {
-  Component,
-  ContentChild,
-  Input,
-  OnInit,
-  Output,
-  TemplateRef,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-
-export interface TabelaExtrato {
-  data: string;
-  lancamentos: string;
-  valor: string;
-  saldo: string;
-  detalhes: string;
-  vazia: string;
-}
+import {
+  DadosService,
+  ModuloTabela,
+  TabelaExtrato,
+} from '../services/dados.service';
 
 @Component({
   selector: 'mat-tabela',
@@ -26,13 +14,32 @@ export interface TabelaExtrato {
 })
 export class MatTabelaComponent implements OnInit {
   dataSource: any;
+  tituloTabela: string;
+  exibirSaldo = false;
   @Input() titulo: string;
-  @Input() dados: {}[] = [];
+  @Input() dados: ModuloTabela;
   @Input() colunas: string[];
 
-  constructor() {}
+  constructor(private dadosService: DadosService) {}
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource(this.dados);
+    this.tituloTabela = this.dados.titulo;
+    this.exibirSaldo = this.verificaSaldo(this.dados.dados);
+    this.dataSource = new MatTableDataSource(this.dados.dados);
+  }
+
+  getDados() {
+    this.dadosService;
+  }
+
+  verificaSaldo(dados: TabelaExtrato[]) {
+    let soma;
+    for (let index = 0; index < this.dados.dados.length; index++) {
+      soma = dados[index].saldo;
+      if (soma > 0) {
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, ContentChild, TemplateRef } from '@angular/core';
+import { Component, ContentChild, Output, TemplateRef } from '@angular/core';
 import { DadosService } from './services/dados.service';
 
 @Component({
@@ -13,12 +13,13 @@ export class AppComponent {
   titleEntradasFuturas = 'entradas futuras';
   titleSaidasFuturas = 'saídas futuras';
   colunas: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes'];
-  semSaldo: string[] = ['data', 'lancamentos', 'valor', 'vazia', 'detalhes'];
+  semSaldo: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes'];
 
   entradasSaidas = this.dadosService.getEntradasSaidas();
   entradasFuturas = this.dadosService.getEntradasFuturas();
   saidasFuturas = this.dadosService.getSaidasFuturas();
 
+  /* Teste com chamada de API */
   constructor(private dadosService: DadosService) {
     this.dadosService.getDadosAPI().subscribe((dados) => {
       console.log(dados);
