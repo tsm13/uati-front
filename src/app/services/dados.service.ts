@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 export interface TabelaExtrato {
   data: string;
   lancamentos: string;
-  valor: string;
+  valor: number;
   saldo: number;
   detalhes: string;
 }
@@ -29,35 +29,35 @@ export class DadosService {
         {
           data: '15/08/2021',
           lancamentos: 'saldo anterior',
-          valor: '',
+          valor: 0,
           saldo: 39533,
           detalhes: '',
         },
         {
           data: '19/08/2021',
           lancamentos: 'Pai pgto automatico itau',
-          valor: '-2.679',
+          valor: -2.679,
           saldo: 0,
           detalhes: '',
         },
         {
           data: '19/08/2021',
           lancamentos: 'Resgate RDB/ CDB',
-          valor: '5.087',
+          valor: 5.087,
           saldo: 0,
           detalhes: '',
         },
         {
           data: '23/08/2021',
           lancamentos: 'Pagamento cheque 002398',
-          valor: '-9.368',
+          valor: -9.368,
           saldo: 0,
           detalhes: '',
         },
         {
           data: '24/08/2021',
           lancamentos: 'saldo do dia',
-          valor: '',
+          valor: 0,
           saldo: 32573.94,
           detalhes: '',
         },
@@ -72,21 +72,21 @@ export class DadosService {
         {
           data: '14/09/2021',
           lancamentos: 'Telefonica 3274-828',
-          valor: '1877',
+          valor: 1877,
           saldo: 0,
           detalhes: '',
         },
         {
           data: '15/09/2021',
           lancamentos: 'Vesper S. A.',
-          valor: '2234',
+          valor: 2234,
           saldo: 0,
           detalhes: '',
         },
         {
           data: '16/09/2021',
           lancamentos: 'Eletropaulo 78059',
-          valor: '2679',
+          valor: 2679,
           saldo: 0,
           detalhes: '',
         },
@@ -101,21 +101,21 @@ export class DadosService {
         {
           data: '10/09/2021',
           lancamentos: 'Porto Seguro Seguros',
-          valor: '-1.877',
+          valor: -1.877,
           saldo: 0,
           detalhes: '',
         },
         {
           data: '10/09/2021',
           lancamentos: 'Compra Carref. PO',
-          valor: '-2.234',
+          valor: -2.234,
           saldo: 0,
           detalhes: '',
         },
         {
           data: '10/09/2021',
           lancamentos: 'SABESP',
-          valor: '-2.679',
+          valor: -2.679,
           saldo: 0,
           detalhes: '',
         },
@@ -123,7 +123,7 @@ export class DadosService {
     };
   }
 
-  /* Teste com chamada de API */
+  /* Teste com chamada de API aleatória */
   getDadosAPI() {
     let url = 'https://jsonplaceholder.typicode.com/users';
     return this.http.get(url);

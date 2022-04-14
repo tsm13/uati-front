@@ -1,8 +1,4 @@
-* {
-  box-sizing: border-box;
-}
-
-/* Tabela Entradas/saídas */
+/* Tabela */
 .tabela {
   margin: 16px 0;
 }
@@ -14,6 +10,21 @@ table.striped > tbody > tr:nth-child(odd) {
 tr.mat-header-row, tr.mat-row {
   height: 32px !important;
 }
+
+.mat-header-cell {
+  color: inherit;
+  font-size: inherit;
+  font-weight: normal;
+}
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type {
+  padding-left: 2% !important;
+}
+
+.mat-expansion-panel-body {
+  padding: 0;
+}
+
 
 /* Colunas */
 .mat-column-data {
@@ -44,6 +55,7 @@ tr.mat-header-row, tr.mat-row {
   text-align: right !important;
   width: 15%;
 }
+
 
 /* Texto */
 .entrada {
@@ -77,10 +89,6 @@ tr.mat-header-row, tr.mat-row {
   font-weight: 700;
 }
 
-.hidden {
-  visibility: hidden;
-}
-
 .add-border {
   border: 1px solid #efe9e5;
 }
@@ -88,20 +96,6 @@ tr.mat-header-row, tr.mat-row {
 .info-icon {
   color: #106EB0;
   font-size: 20px;
-}
-
-.mat-header-cell {
-  color: inherit;
-  font-size: inherit;
-  font-weight: normal;
-}
-
-th.mat-header-cell:first-of-type, td.mat-cell:first-of-type {
-  padding-left: 2% !important;
-}
-
-.mat-expansion-panel-body {
-  padding: 0;
 }
 
 

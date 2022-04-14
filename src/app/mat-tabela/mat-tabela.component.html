@@ -26,13 +26,13 @@
       <th class="col-valor" mat-header-cell *matHeaderCellDef>valor (R$)</th>
       <td
         [ngClass]="{
-          entrada: elemento.valor.startsWith(''),
-          saida: elemento.valor.startsWith('-')
+          entrada: elemento.valor > 0,
+          saida: elemento.valor < 0
         }"
         mat-cell
         *matCellDef="let elemento"
       >
-        {{ elemento.valor }}
+        {{ elemento.valor != 0 ? elemento.valor : "" }}
       </td>
     </ng-container>
 
@@ -41,7 +41,7 @@
         {{ exibirSaldo ? "saldo (R$)" : "" }}
       </th>
       <td class="saldo pl" mat-cell *matCellDef="let elemento">
-        {{ elemento.saldo }}
+        {{ elemento.saldo != 0 ? elemento.saldo : "" }}
       </td>
     </ng-container>
 
