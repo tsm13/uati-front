@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
 import {
@@ -14,12 +20,15 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class MatTabelaComponent implements OnInit {
-  dataSource: any;
+  @Output() dataSource: any;
   tituloTabela: string;
   exibirSaldo = false;
   @Input() titulo: string;
   @Input() dados: ModuloTabela;
   @Input() colunas: string[];
+  @Input() keyword: string;
+
+  searchText: string;
 
   constructor(private dadosService: DadosService) {}
 
@@ -42,5 +51,10 @@ export class MatTabelaComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  public filtroBusca(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtro.trim().toLowerCase();
   }
 }

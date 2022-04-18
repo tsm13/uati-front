@@ -1,4 +1,9 @@
 <div class="row">
+  <input
+    matInput
+    (keyup)="filtroBusca($event)"
+    placeholder=" ex: saque, TED, DOC"
+  />
   <p class="b pl">{{ tituloTabela }}</p>
   <table mat-table [dataSource]="dataSource" class="tabela striped">
     <ng-container matColumnDef="data">
@@ -52,5 +57,9 @@
 
     <tr mat-header-row *matHeaderRowDef="colunas"></tr>
     <tr mat-row *matRowDef="let linha; columns: colunas"></tr>
+
+    <tr *matNoDataRow>
+      <td>Não há dados para serem exibidos.</td>
+    </tr>
   </table>
 </div>
