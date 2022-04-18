@@ -28,8 +28,6 @@ export class MatTabelaComponent implements OnInit {
   @Input() colunas: string[];
   @Input() keyword: string;
 
-  searchText: string;
-
   constructor(private dadosService: DadosService) {}
 
   ngOnInit() {
