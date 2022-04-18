@@ -21,6 +21,13 @@ import { MatTabelaComponent } from './mat-tabela/mat-tabela.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { RodapeComponent } from './rodape/rodape.component';
 import { DadosService } from './services/dados.service';
+import { LOCALE_ID } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE } from '@angular/core';
+
+import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -46,7 +53,9 @@ import { DadosService } from './services/dados.service';
     MatTableModule,
     CdkAccordionModule,
   ],
-  providers: [DadosService],
+  providers: [DadosService, HttpClientModule,
+    { provide: LOCALE_ID, useValue: 'pt-Br' },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

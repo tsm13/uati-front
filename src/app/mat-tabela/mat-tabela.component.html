@@ -1,3 +1,5 @@
+
+
 <div class="row">
   <p class="b pl">{{ tituloTabela }}</p>
   <table mat-table [dataSource]="dataSource" class="tabela striped">
@@ -32,7 +34,7 @@
         mat-cell
         *matCellDef="let elemento"
       >
-        {{ elemento.valor }}
+        {{ elemento.valor | currency }}
       </td>
     </ng-container>
 

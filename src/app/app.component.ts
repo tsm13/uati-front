@@ -21,8 +21,5 @@ export class AppComponent {
 
   /* Teste com chamada de API */
   constructor(private dadosService: DadosService) {
-    this.dadosService.getDadosAPI().subscribe((dados) => {
-      console.log(dados);
-    });
   }
 }
