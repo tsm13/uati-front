@@ -37,7 +37,7 @@
         mat-cell
         *matCellDef="let elemento"
       >
-        {{ elemento.valor != 0 ? elemento.valor : "" }}
+        {{ elemento.valor != 0 ? (elemento.valor | currency: "":"") : "" }}
       </td>
     </ng-container>
 
@@ -46,7 +46,7 @@
         {{ exibirSaldo ? "saldo (R$)" : "" }}
       </th>
       <td class="saldo pl" mat-cell *matCellDef="let elemento">
-        {{ elemento.saldo != 0 ? elemento.saldo : "" }}
+        {{ elemento.saldo != 0 ? (elemento.saldo | currency: "":"") : "" }}
       </td>
     </ng-container>
 

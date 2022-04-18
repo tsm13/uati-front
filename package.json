@@ -24,6 +24,7 @@
     "@react-md/card": "^5.1.0",
     "angular-icons": "^1.0.11",
     "ionicons": "^6.0.1",
+    "json-server": "^0.17.0",
     "material-icons": "^1.10.8",
     "materialize-css": "^1.0.0-rc.2",
     "open-iconic": "^1.1.1",

@@ -12,18 +12,13 @@ export class AppComponent {
   colunas: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes'];
   keyword: string = '';
 
+  constructor(private dadosService: DadosService) {}
+
   entradasSaidas = this.dadosService.getEntradasSaidas();
   entradasFuturas = this.dadosService.getEntradasFuturas();
   saidasFuturas = this.dadosService.getSaidasFuturas();
 
   filtrar(keyword: string) {
     this.keyword = keyword;
-  }
-
-  /* Teste com chamada de API */
-  constructor(private dadosService: DadosService) {
-    this.dadosService.getDadosAPI().subscribe((dados) => {
-      console.log(dados);
-    });
   }
 }

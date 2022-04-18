@@ -11,9 +11,6 @@ import { AtualizadoComponent } from './atualizado/atualizado.component';
 import { MatTabelaComponent } from './mat-tabela/mat-tabela.component';
 import { RodapeComponent } from './rodape/rodape.component';
 import { DadosService } from './services/dados.service';
-import { FiltroComponent } from './filtro/filtro.component';
-import { TesteComponent } from './teste/teste.component';
-import { FiltroPipeService } from './services/filtro-pipe.service';
 
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,8 +20,19 @@ import { MatTableModule } from '@angular/material/table';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LOCALE_ID } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE } from '@angular/core';
+import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+
+/* Testes: */
+import { FiltroComponent } from './filtro/filtro.component';
+import { TesteComponent } from './teste/teste.component';
+import { FiltroPipeService } from './services/filtro-pipe.service';
+
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -56,7 +64,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [DadosService],
+  providers: [
+    DadosService,
+    HttpClientModule,
+    { provide: LOCALE_ID, useValue: 'pt-Br' },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
