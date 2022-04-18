@@ -26,7 +26,6 @@ export class MatTabelaComponent implements OnInit {
   @Input() titulo: string;
   @Input() dados: ModuloTabela;
   @Input() colunas: string[];
-  @Input() keyword: string;
 
   constructor(private dadosService: DadosService) {}
 
@@ -49,10 +48,5 @@ export class MatTabelaComponent implements OnInit {
       }
     }
     return false;
-  }
-
-  public filtroBusca(event: Event) {
-    const filtro = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filtro.trim().toLowerCase();
   }
 }
