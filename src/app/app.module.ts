@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
 
 import { AppSaldoComponent } from './app-saldo/app-saldo.component';
+import { DadosService } from './services/dados.service';
 import { AtualizadoComponent } from './atualizado/atualizado.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { MatTabelaComponent } from './mat-tabela/mat-tabela.component';
 import { RodapeComponent } from './rodape/rodape.component';
-import { DadosService } from './services/dados.service';
 
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,16 +20,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LOCALE_ID } from '@angular/core';
 import { DEFAULT_CURRENCY_CODE } from '@angular/core';
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
-
-/* Testes: */
-import { FiltroComponent } from './filtro/filtro.component';
-import { TesteComponent } from './teste/teste.component';
-import { FiltroPipeService } from './services/filtro-pipe.service';
 
 registerLocaleData(ptBr);
 
@@ -42,9 +35,6 @@ registerLocaleData(ptBr);
     MatTabelaComponent,
     RodapeComponent,
     AtualizadoComponent,
-    FiltroComponent,
-    TesteComponent,
-    FiltroPipeService,
   ],
 
   imports: [
@@ -61,8 +51,6 @@ registerLocaleData(ptBr);
     MatExpansionModule,
     MatIconModule,
     MatTableModule,
-    FormsModule,
-    ReactiveFormsModule,
   ],
   providers: [
     DadosService,

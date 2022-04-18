@@ -1,9 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container">
   <app-saldo></app-saldo>
-  <app-filtro></app-filtro>
   <div class="lancamentos">
-    <app-teste (emitter)="filtrar($event)"></app-teste>
     <mat-accordion>
       <mat-expansion-panel
         (opened)="lancamentosFuturosAberto = true"
@@ -17,16 +15,8 @@
             {{ lancamentosFuturosAberto ? "ocultar" : "exibir" }}
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <mat-tabela
-          [dados]="entradasFuturas"
-          [colunas]="colunas"
-          [keyword]="keyword"
-        ></mat-tabela>
-        <mat-tabela
-          [dados]="saidasFuturas"
-          [colunas]="colunas"
-          [keyword]="keyword"
-        ></mat-tabela>
+        <mat-tabela [dados]="entradasFuturas" [colunas]="colunas"></mat-tabela>
+        <mat-tabela [dados]="saidasFuturas" [colunas]="colunas"></mat-tabela>
       </mat-expansion-panel>
     </mat-accordion>
     <mat-tabela [dados]="entradasSaidas" [colunas]="colunas"></mat-tabela>

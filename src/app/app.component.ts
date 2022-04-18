@@ -10,15 +10,10 @@ export class AppComponent {
   title = 'itau';
   lancamentosFuturosAberto = false;
   colunas: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes'];
-  keyword: string = '';
 
   constructor(private dadosService: DadosService) {}
 
   entradasSaidas = this.dadosService.getEntradasSaidas();
   entradasFuturas = this.dadosService.getEntradasFuturas();
   saidasFuturas = this.dadosService.getSaidasFuturas();
-
-  filtrar(keyword: string) {
-    this.keyword = keyword;
-  }
 }
