@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BackendService } from '../services/backend.service';
 import { Saldo, SaldoTotal } from '../services/interfaces/saldo';
 
@@ -10,10 +11,11 @@ import { Saldo, SaldoTotal } from '../services/interfaces/saldo';
 export class AppSaldoComponent implements OnInit {
   constructor(private service: BackendService) {}
   saldo: number = 2000; // < apagar depois
-  saldoPOST: SaldoTotal;
+  saldoPOST: Observable<SaldoTotal>;
 
   ngOnInit() {
     this.toDisplay = JSON.parse(localStorage.getItem('display')!);
+    this.verSaldo();
   }
 
   toDisplay!: boolean;
@@ -22,11 +24,11 @@ export class AppSaldoComponent implements OnInit {
     localStorage.setItem('display', JSON.stringify(this.toDisplay));
   }
 
-  /*  async verSaldo() {
-    saldoPOST = await this.service.mostraSaldo({
+  verSaldo() {
+    this.saldoPOST = this.service.mostraSaldo({
       agencia: '0123',
       conta: '01234',
       dac: '0',
-    }).toPromise;
-  } */
+    });
+  }
 }

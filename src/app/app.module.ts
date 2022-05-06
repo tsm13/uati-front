@@ -48,7 +48,6 @@ registerLocaleData(ptBr);
     MatCardModule,
     MatFormFieldModule,
     MatExpansionModule,
-    MatIconModule,
     MatTableModule,
   ],
   providers: [
