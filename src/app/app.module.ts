@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AppSaldoComponent } from './app-saldo/app-saldo.component';
-import { DadosService } from './services/dados.service';
 import { AtualizadoComponent } from './atualizado/atualizado.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatTabelaComponent } from './mat-tabela/mat-tabela.component';
@@ -53,8 +52,6 @@ registerLocaleData(ptBr);
     MatTableModule,
   ],
   providers: [
-    DadosService,
-    HttpClientModule,
     { provide: LOCALE_ID, useValue: 'pt-Br' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
   ],
