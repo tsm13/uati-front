@@ -19,7 +19,9 @@
     </div>
     <a href="#"><i class="material-icons icon-conta">account_box</i></a>
     <div class="container-1">
-      <p class="txt-ag">{{ conta }}</p>
+      <p class="txt-ag" *ngIf="verCC | async as cc">
+        ag {{ cc.agencia }} c/c {{ cc.conta }}-{{ cc.dac }}
+      </p>
     </div>
     <button class="btn-sair" type="button">
       <i class="material-icons">lock</i><span>sair</span>

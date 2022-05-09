@@ -10,7 +10,6 @@ import { Saldo, SaldoTotal } from '../services/interfaces/saldo';
 })
 export class AppSaldoComponent implements OnInit {
   constructor(private service: BackendService) {}
-  saldo: number = 2000; // < apagar depois
   saldoPOST: Observable<SaldoTotal>;
 
   ngOnInit() {
