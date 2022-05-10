@@ -11,7 +11,7 @@ import {
   DadosService,
   ModuloTabela,
   TabelaExtrato,
-} from '../services/dados.service';
+} from 'src/app/services/dados.service';
 
 @Component({
   selector: 'mat-tabela',

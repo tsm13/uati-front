@@ -5,9 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AppSaldoComponent } from './app-saldo/app-saldo.component';
-import { AtualizadoComponent } from './atualizado/atualizado.component';
+import { AtualizadoComponent } from './shared/extrato/atualizado/atualizado.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { MatTabelaComponent } from './mat-tabela/mat-tabela.component';
+import { MatTabelaComponent } from './shared/extrato/mat-tabela/mat-tabela.component';
 import { RodapeComponent } from './rodape/rodape.component';
 
 import { CdkAccordionModule } from '@angular/cdk/accordion';
@@ -22,7 +22,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { LOCALE_ID } from '@angular/core';
 import { DEFAULT_CURRENCY_CODE } from '@angular/core';
 import ptBr from '@angular/common/locales/pt';
-import { registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
+import { ExtratoComponent } from './shared/extrato/extrato.component';
 
 registerLocaleData(ptBr);
 
@@ -34,6 +35,7 @@ registerLocaleData(ptBr);
     MatTabelaComponent,
     RodapeComponent,
     AtualizadoComponent,
+    ExtratoComponent,
   ],
 
   imports: [
@@ -51,6 +53,7 @@ registerLocaleData(ptBr);
     MatTableModule,
   ],
   providers: [
+    DatePipe,
     { provide: LOCALE_ID, useValue: 'pt-Br' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
   ],

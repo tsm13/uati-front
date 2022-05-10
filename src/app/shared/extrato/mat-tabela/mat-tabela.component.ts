@@ -1,18 +1,6 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  Output,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { BackendService } from '../services/backend.service';
-
-import {
-  Extrato,
-  ListaExtrato,
-  ModuloListaExtrato,
-} from '../services/interfaces/extrato';
+import { ModuloListaExtrato } from 'src/app/services/interfaces/extrato';
 
 @Component({
   selector: 'mat-tabela',

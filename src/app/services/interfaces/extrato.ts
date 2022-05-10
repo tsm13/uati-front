@@ -9,6 +9,8 @@ export interface ListaExtrato {
   lancamento: string;
   valor: number;
   detalhes: string;
+  futuroOuPassado: string;
+  entradaOuSaida: string;
 }
 
 export interface ModuloListaExtrato {
