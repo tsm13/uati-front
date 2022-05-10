@@ -12,12 +12,8 @@
           {{ lancamentosFuturosAberto ? "ocultar" : "exibir" }}
         </mat-panel-description>
       </mat-expansion-panel-header>
+      <!-- <mat-tabela [dados]="entradasFuturas" [colunas]="colunas"></mat-tabela> -->
       <!-- <mat-tabela [dados]="saidasFuturas" [colunas]="colunas"></mat-tabela> -->
-      <mat-tabela
-        *ngIf="entradasSaidas | async as dados"
-        [dados]="dados"
-        [colunas]="colunas"
-      ></mat-tabela>
     </mat-expansion-panel>
   </mat-accordion>
   <mat-tabela
