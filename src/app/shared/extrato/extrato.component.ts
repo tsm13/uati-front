@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { filter, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { BackendService } from 'src/app/services/backend.service';
 import { ModuloListaExtrato } from 'src/app/services/interfaces/extrato';
 
@@ -13,16 +13,49 @@ export class ExtratoComponent implements OnInit {
 
   lancamentosFuturosAberto = false;
   colunas: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes'];
+  entradasFuturas: Observable<ModuloListaExtrato>;
   saidasFuturas: Observable<ModuloListaExtrato>;
-  entradasFuturas: ModuloListaExtrato;
-
-  entradasSaidas = this.service.mostraExtrato({
-    agencia: '0123',
-    conta: '00587',
-    dac: '1',
-  });
+  entradasSaidas: Observable<ModuloListaExtrato>;
 
   ngOnInit(): void {
+    this.entradasSaidas = this.service
+      .mostraExtrato({
+        agencia: '0123',
+        conta: '00587',
+        dac: '1',
+      })
+      .pipe(
+        map((lancamento: ModuloListaExtrato) => {
+          let entradaSaida = lancamento.dados;
+          let modulo = {
+            titulo: 'entradas/saídas',
+            dados: entradaSaida,
+          };
+          return modulo;
+        })
+      );
+
+    this.entradasFuturas = this.service
+      .mostraExtrato({
+        agencia: '0123',
+        conta: '00587',
+        dac: '1',
+      })
+      .pipe(
+        map((lancamento: ModuloListaExtrato) => {
+          let entradaFutura = lancamento.dados.filter(
+            (lancamento) =>
+              lancamento.entradaOuSaida == 'ENTRADA' &&
+              lancamento.futuroOuPassado == 'FUTURO'
+          );
+          let modulo = {
+            titulo: 'entradas futuras',
+            dados: entradaFutura,
+          };
+          return modulo;
+        })
+      );
+
     this.saidasFuturas = this.service
       .mostraExtrato({
         agencia: '0123',
@@ -43,39 +76,5 @@ export class ExtratoComponent implements OnInit {
           return modulo;
         })
       );
-
-    /*  const dados = (lancamento: ModuloListaExtrato) => {
-      let saidaFutura = lancamento.dados.filter(
-        (lancamento) =>
-          lancamento.entradaOuSaida == 'SAIDA' &&
-          lancamento.futuroOuPassado == 'FUTURO'
-      );
-    };
-
-    this.service
-      .mostraExtrato({
-        agencia: '0123',
-        conta: '00587',
-        dac: '1',
-      })
-      .pipe(filter(dados)); */
-
-    this.service
-      .mostraExtrato({
-        agencia: '0123',
-        conta: '00587',
-        dac: '1',
-      })
-      .subscribe((lancamento) => {
-        let saidaFutura = lancamento.dados.filter(
-          (lancamento) =>
-            lancamento.entradaOuSaida == 'SAIDA' &&
-            lancamento.futuroOuPassado == 'PASSADO'
-        );
-        this.entradasFuturas = {
-          titulo: 'saídas futuras',
-          dados: saidaFutura,
-        };
-      });
   }
 }
