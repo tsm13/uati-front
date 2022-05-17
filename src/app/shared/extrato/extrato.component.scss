@@ -3,15 +3,103 @@
   line-height: 16px;
 }
 
-a {
-  text-decoration: underline;
-}
-
-.lancamentos {
+.tabela-lancamentos{
   border: 1px solid #EFE9E5;
   border-radius: 0px 0px 4px 4px;
 }
 
+.mt32 {
+  margin-top: 32px;
+}
+
+.tab-lancamentos-titulo {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  width: 213px;
+  height: 45px;
+  border: 1px solid #EFE9E5;
+  padding: 11px 11px 0 11px;
+}
+
+.retangulos {
+  height: 3px;
+  position: relative;
+}
+
+.ret-branco {
+  width: 211px;
+  background-color: #fff;
+  top: 12px;
+  left: -11px;
+}
+
+.ret-laranja {
+  width: 212px;
+  background-color: #EC7000;
+  top: -13px;
+  left: -11px;
+}
+
+/* Filtro: Botões */
+.menu-botoes{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+.filtro-botao {
+  color: #106EB0;
+  background-color: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: 24px;
+  border: 1px solid #106EB0
+}
+
+.filtro-botao:hover {
+  background: #E4F5FC;
+}
+
+.filtro-botao:focus{
+  color: #FFFFFF;
+  background: #106EB0;
+}
+
+/* Filtro: Menus Período, ordenação, busca */
+.filtro-titulo {
+  color: #56504C;
+  font-size: 14px;
+}
+
+.filtro-tempo{
+  display: flex;
+  flex-direction: column;
+}
+
+.searchbar {
+  display: flex;
+}
+
+.busca {
+  text-align: right;
+  margin-right: 24px;
+}
+
+.icon {
+  color: #EC7000;
+  margin: 10px 0;
+}
+
+/* Mat-select */
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: #ffffff;
+  padding: 0 !important;
+}
+
+::ng-deep .mat-form-field-label {
+  color: #231D19;
+}
 
 /* Tabela lançamentos furutos : Mat-Expansion */
 .toggle-exibir {
@@ -32,3 +120,5 @@ a {
   background: #FAF8F7;
   border: 1px solid #89837f;
 }
+
+

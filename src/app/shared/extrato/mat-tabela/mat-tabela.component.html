@@ -7,7 +7,7 @@
         {{ elemento.dataLancamento }}
       </td>
     </ng-container>
-
+    ng s
     <ng-container matColumnDef="lancamentos">
       <th mat-header-cell *matHeaderCellDef>lançamentos</th>
       <td class="lancamentos-titulo pl" mat-cell *matCellDef="let elemento">
@@ -45,5 +45,11 @@
 
     <tr mat-header-row *matHeaderRowDef="colunas"></tr>
     <tr mat-row *matRowDef="let linha; columns: colunas"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="sem-resultado mat-cell" colspan="5">
+        iD
+        <p>nenhum resultado encontrado</p>
+      </td>
+    </tr>
   </table>
 </div>

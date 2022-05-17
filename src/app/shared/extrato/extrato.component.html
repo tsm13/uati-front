@@ -1,4 +1,74 @@
-<div class="lancamentos">
+<div class="tab-lancamentos-titulo">
+  <div class="retangulos ret-laranja"></div>
+  lançamentos
+  <div class="retangulos ret-branco"></div>
+</div>
+<div class="tabela-lancamentos">
+  <div class="row">
+    <div class="col s12 mt32">
+      <div class="filtro-titulo menu-botoes">
+        vizualizar
+        <button class="filtro-botao" (click)="filtroTodas()">todas</button>
+        <button class="filtro-botao" (click)="filtroEntradas()">
+          entradas
+        </button>
+        <button class="filtro-botao" (click)="filtroSaidas()">saídas</button>
+        <button class="filtro-botao" (click)="filtroFuturos()">futuros</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s4 filtro-tempo">
+      <div class="filtro-titulo">período específico</div>
+      <mat-form-field appearance="fill">
+        <mat-select [(value)]="selectedPeriodo">
+          <mat-option value="ontem" (click)="filtroOntem()">ontem</mat-option>
+          <mat-option value="7dias" (click)="filtro7Dias()">7 dias</mat-option>
+          <mat-option value="option3" (click)="filtro30Dias()"
+            >30 dias</mat-option
+          >
+          <mat-option value="option3" (click)="filtro90Dias()"
+            >90 dias</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col s2 filtro-tempo">
+      <div class="filtro-titulo">ordenar por</div>
+      <mat-form-field appearance="fill">
+        <mat-select [(value)]="selectedOrdenacao">
+          <mat-option value="maisAntigo">mais antigo</mat-option>
+          <mat-option value="maisRecente">mais recente</mat-option>
+          <mat-option value="ultimoMes">último mês</mat-option>
+          <mat-option value="ultimos3Meses">últimos 3 meses</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col s4 offset-s2 filtro-tempo">
+      <div class="filtro-titulo">busca</div>
+      <div class="searchbar">
+        <input
+          matInput
+          (keyup)="filtroBusca($event)"
+          placeholder=" ex: saque, TED, DOC"
+        /><mat-icon class="icon">search</mat-icon>
+      </div>
+    </div>
+  </div>
+  <div class="row busca" *ngIf="filtro">
+    resultado de <b>{{ resultadoDe }}</b> do período
+    <span *ngIf="periodo == 'do último dia'"
+      ><b>{{ periodo }}</b></span
+    >
+    <span *ngIf="periodo != 'do último dia'"
+      >do últimos <b>{{ periodo }}</b> dias</span
+    >
+    para o termo <b>{{ filtro }}</b>
+  </div>
+
   <mat-accordion>
     <mat-expansion-panel
       (opened)="lancamentosFuturosAberto = true"
@@ -16,18 +86,22 @@
         *ngIf="entradasFuturas | async as dados"
         [dados]="dados"
         [colunas]="colunas"
+        [hidden]="!mostrarEntradasFuturas"
       ></mat-tabela>
       <mat-tabela
         *ngIf="saidasFuturas | async as dados"
         [dados]="dados"
         [colunas]="colunas"
+        [hidden]="!mostrarSaidasFuturas"
       ></mat-tabela>
     </mat-expansion-panel>
   </mat-accordion>
   <mat-tabela
+    #entradasSaidas
     *ngIf="entradasSaidas | async as dados"
     [dados]="dados"
     [colunas]="colunas"
+    [hidden]="!mostrarEntradasSaidas"
   ></mat-tabela>
   <app-atualizado></app-atualizado>
 </div>

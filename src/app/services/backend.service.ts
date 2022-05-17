@@ -1,12 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ContaCorrente, VerContaCorrente } from './interfaces/conta-corrente';
-import {
-  Extrato,
-  ListaExtrato,
-  ModuloListaExtrato,
-} from './interfaces/extrato';
+import { Extrato, ModuloListaExtrato } from './interfaces/extrato';
 import { Saldo, SaldoTotal } from './interfaces/saldo';
 
 @Injectable({
@@ -18,7 +14,6 @@ export class BackendService {
   extratoURL = 'http://localhost:8080/extrato';
 
   constructor(private http: HttpClient) {}
-
   mostraSaldo(saldo: Saldo): Observable<SaldoTotal> {
     return this.http.post<SaldoTotal>(this.saldoURL, saldo);
   }
@@ -30,6 +25,32 @@ export class BackendService {
   }
 
   mostraExtrato(extrato: Extrato): Observable<ModuloListaExtrato> {
-    return this.http.post<ModuloListaExtrato>(this.extratoURL, extrato);
+    return this.http.post<ModuloListaExtrato>(this.extratoURL, extrato).pipe(
+      map((lancamento: ModuloListaExtrato) => {
+        let entradaSaida = lancamento.dados.sort(
+          (x, y) => +new Date(x.dataLancamento) - +new Date(y.dataLancamento)
+        );
+        let modulo = {
+          titulo: 'entradas/saídas',
+          dados: entradaSaida,
+        };
+        return modulo;
+      })
+    );
   }
 }
+
+/* mostraExtrato(extrato: Extrato): Observable<ModuloListaExtrato> {
+  return this.http.post<ModuloListaExtrato>(this.extratoURL, extrato).pipe(
+    map((lancamento: ModuloListaExtrato) => {
+      let entradaSaida = lancamento.dados.filter((lancamento) =>
+        formatDate(lancamento.dataLancamento, 'dd/MM/yyyy', 'pt-br')
+      );
+      let modulo = {
+        titulo: 'entradas/saídas',
+        dados: entradaSaida,
+      };
+      return modulo;
+    })
+  );
+} */

@@ -1,6 +1,10 @@
+import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ModuloListaExtrato } from 'src/app/services/interfaces/extrato';
+import {
+  ListaExtrato,
+  ModuloListaExtrato,
+} from 'src/app/services/interfaces/extrato';
 
 @Component({
   selector: 'mat-tabela',
@@ -9,10 +13,9 @@ import { ModuloListaExtrato } from 'src/app/services/interfaces/extrato';
   encapsulation: ViewEncapsulation.None,
 })
 export class MatTabelaComponent implements OnInit {
-  dataSource: any;
   tituloTabela: string;
   exibirSaldo = false;
-  @Input() titulo: string;
+  @Input() dataSource: any;
   @Input() dados: ModuloListaExtrato;
   @Input() colunas: string[];
 

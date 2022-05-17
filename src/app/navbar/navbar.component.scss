@@ -5,6 +5,10 @@
   font-family: Arial;
 }
 
+a {
+  color: transparent;
+}
+
 .itau {
   height: 70px;
   width: 100%;
@@ -127,6 +131,7 @@ ul.breadcrumb-itau li + li:before {
   color: black;
   content: ">\00a0";
 }
+
 ul.breadcrumb-itau li a {
   color: #248ce7;
   text-decoration: none;

@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -51,6 +52,7 @@ registerLocaleData(ptBr);
     MatFormFieldModule,
     MatExpansionModule,
     MatTableModule,
+    MatSelectModule,
   ],
   providers: [
     DatePipe,

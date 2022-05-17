@@ -1,10 +1,11 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-atualizado',
   templateUrl: './atualizado.component.html',
   styleUrls: ['./atualizado.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AtualizadoComponent implements OnInit {
   atualizadoEm: Date;
