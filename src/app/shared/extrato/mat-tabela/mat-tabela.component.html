@@ -1,13 +1,18 @@
 <div class="row">
   <p class="b pl">{{ tituloTabela }}</p>
-  <table mat-table [dataSource]="dataSource" class="tabela striped">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="tabela striped"
+    (contentChanged)="funFiltro()"
+  >
     <ng-container matColumnDef="data">
       <th mat-header-cell *matHeaderCellDef>data</th>
       <td class="add-border" mat-cell *matCellDef="let elemento">
         {{ elemento.dataLancamento }}
       </td>
     </ng-container>
-    ng s
+
     <ng-container matColumnDef="lancamentos">
       <th mat-header-cell *matHeaderCellDef>lançamentos</th>
       <td class="lancamentos-titulo pl" mat-cell *matCellDef="let elemento">

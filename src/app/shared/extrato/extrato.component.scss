@@ -61,7 +61,7 @@
   background: #E4F5FC;
 }
 
-.filtro-botao:focus{
+.filtro-botao:focus, .filtro-botao.active{
   color: #FFFFFF;
   background: #106EB0;
 }

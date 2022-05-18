@@ -8,12 +8,34 @@
     <div class="col s12 mt32">
       <div class="filtro-titulo menu-botoes">
         vizualizar
-        <button class="filtro-botao" (click)="filtroTodas()">todas</button>
-        <button class="filtro-botao" (click)="filtroEntradas()">
+        <button
+          class="filtro-botao"
+          [ngClass]="{ active: conteudoFiltro.vizualizar === 'todas' }"
+          (click)="filtroBusca('todas')"
+        >
+          todas
+        </button>
+        <button
+          class="filtro-botao"
+          [ngClass]="{ active: conteudoFiltro.vizualizar === 'entradas' }"
+          (click)="filtroBusca('entradas')"
+        >
           entradas
         </button>
-        <button class="filtro-botao" (click)="filtroSaidas()">saídas</button>
-        <button class="filtro-botao" (click)="filtroFuturos()">futuros</button>
+        <button
+          class="filtro-botao"
+          [ngClass]="{ active: conteudoFiltro.vizualizar === 'saidas' }"
+          (click)="filtroBusca('saidas')"
+        >
+          saídas
+        </button>
+        <button
+          class="filtro-botao"
+          [ngClass]="{ active: conteudoFiltro.vizualizar === 'futuros' }"
+          (click)="filtroBusca('futuros')"
+        >
+          futuros
+        </button>
       </div>
     </div>
   </div>
@@ -22,15 +44,14 @@
     <div class="col s4 filtro-tempo">
       <div class="filtro-titulo">período específico</div>
       <mat-form-field appearance="fill">
-        <mat-select [(value)]="selectedPeriodo">
-          <mat-option value="ontem" (click)="filtroOntem()">ontem</mat-option>
-          <mat-option value="7dias" (click)="filtro7Dias()">7 dias</mat-option>
-          <mat-option value="option3" (click)="filtro30Dias()"
-            >30 dias</mat-option
-          >
-          <mat-option value="option3" (click)="filtro90Dias()"
-            >90 dias</mat-option
-          >
+        <mat-select
+          [(ngModel)]="conteudoFiltro.periodo"
+          (selectionChange)="filtroBusca()"
+        >
+          <mat-option value="ontem">ontem</mat-option>
+          <mat-option value="7dias">7 dias</mat-option>
+          <mat-option value="30dias">30 dias</mat-option>
+          <mat-option value="90dias">90 dias</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -38,11 +59,12 @@
     <div class="col s2 filtro-tempo">
       <div class="filtro-titulo">ordenar por</div>
       <mat-form-field appearance="fill">
-        <mat-select [(value)]="selectedOrdenacao">
+        <mat-select
+          [(ngModel)]="conteudoFiltro.ordenacao"
+          (selectionChange)="filtroBusca()"
+        >
           <mat-option value="maisAntigo">mais antigo</mat-option>
           <mat-option value="maisRecente">mais recente</mat-option>
-          <mat-option value="ultimoMes">último mês</mat-option>
-          <mat-option value="ultimos3Meses">últimos 3 meses</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -51,8 +73,10 @@
       <div class="filtro-titulo">busca</div>
       <div class="searchbar">
         <input
+          [(ngModel)]="conteudoFiltro.busca"
+          #input
           matInput
-          (keyup)="filtroBusca($event)"
+          (keyup)="filtroBusca()"
           placeholder=" ex: saque, TED, DOC"
         /><mat-icon class="icon">search</mat-icon>
       </div>
@@ -87,12 +111,14 @@
         [dados]="dados"
         [colunas]="colunas"
         [hidden]="!mostrarEntradasFuturas"
+        [setDadosFiltro]="conteudoFiltro"
       ></mat-tabela>
       <mat-tabela
         *ngIf="saidasFuturas | async as dados"
         [dados]="dados"
         [colunas]="colunas"
         [hidden]="!mostrarSaidasFuturas"
+        [setDadosFiltro]="conteudoFiltro"
       ></mat-tabela>
     </mat-expansion-panel>
   </mat-accordion>
@@ -102,6 +128,7 @@
     [dados]="dados"
     [colunas]="colunas"
     [hidden]="!mostrarEntradasSaidas"
+    [setDadosFiltro]="conteudoFiltro"
   ></mat-tabela>
   <app-atualizado></app-atualizado>
 </div>

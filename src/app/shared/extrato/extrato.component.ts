@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { BackendService } from 'src/app/services/backend.service';
 import { ModuloListaExtrato } from 'src/app/services/interfaces/extrato';
@@ -12,7 +18,10 @@ import { parseISO, isBefore, isAfter, subDays, isSameDay } from 'date-fns';
   styleUrls: ['./extrato.component.scss'],
 })
 export class ExtratoComponent implements OnInit {
-  constructor(private service: BackendService) {}
+  constructor(
+    private service: BackendService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   lancamentosFuturosAberto = false;
   dados: ModuloListaExtrato;
@@ -28,11 +37,19 @@ export class ExtratoComponent implements OnInit {
   resultadoDe = 'todas as transferências';
   periodo = '7 dias';
 
+  conteudoFiltro: any = {
+    vizualizar: 'todas',
+    periodo: '7dias',
+    ordenacao: 'maisAntigo',
+    busca: null,
+  };
+
   mostrarEntradasFuturas: boolean = true;
   mostrarSaidasFuturas: boolean = true;
   mostrarEntradasSaidas: boolean = true;
 
   @ViewChild('entradasSaidas') tabela: MatTabelaComponent;
+  @ViewChild('input') input: ElementRef;
 
   ngOnInit(): void {
     this.entradasSaidas = this.service
@@ -124,6 +141,10 @@ export class ExtratoComponent implements OnInit {
           return modulo;
         })
       );
+    /*     this.entradasSaidas.subscribe(() => {
+      let event = new Event('keyup');
+      this.input.nativeElement.dispatchEvent(event);
+    }); */
   }
 
   public filtro7Dias() {
@@ -207,10 +228,20 @@ export class ExtratoComponent implements OnInit {
       );
   }
 
-  /* Filtro Busca */
-  public filtroBusca(event: Event) {
-    this.filtro = (event.target as HTMLInputElement).value;
-    this.tabela.dataSource.filter = this.filtro.trim().toLowerCase();
+  /*   public funFiltro() {
+    let event = new Event('keyup');
+    this.input.nativeElement.dispatchEvent(event);
+    console.log('teste');
+  } */
+
+  /* Filtro Busca - botões */
+  public filtroBusca(vizualizar?: string) {
+    this.conteudoFiltro.vizualizar = vizualizar
+      ? vizualizar
+      : this.conteudoFiltro.vizualizar;
+    this.cdr.detectChanges();
+    console.log(this.conteudoFiltro);
+    /*     this.tabela.dataSource.filter = this.filtro.trim().toLowerCase(); */
   }
 
   /* Filtros Botões */

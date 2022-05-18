@@ -25,6 +25,7 @@ import { DEFAULT_CURRENCY_CODE } from '@angular/core';
 import ptBr from '@angular/common/locales/pt';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { ExtratoComponent } from './shared/extrato/extrato.component';
+import { FormsModule } from '@angular/forms';
 
 registerLocaleData(ptBr);
 
@@ -53,6 +54,7 @@ registerLocaleData(ptBr);
     MatExpansionModule,
     MatTableModule,
     MatSelectModule,
+    FormsModule,
   ],
   providers: [
     DatePipe,
