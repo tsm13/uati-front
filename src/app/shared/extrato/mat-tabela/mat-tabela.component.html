@@ -1,11 +1,6 @@
 <div class="row">
   <p class="b pl">{{ tituloTabela }}</p>
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    class="tabela striped"
-    (contentChanged)="funFiltro()"
-  >
+  <table mat-table [dataSource]="dataSource" class="tabela striped">
     <ng-container matColumnDef="data">
       <th mat-header-cell *matHeaderCellDef>data</th>
       <td class="add-border" mat-cell *matCellDef="let elemento">
@@ -52,7 +47,7 @@
     <tr mat-row *matRowDef="let linha; columns: colunas"></tr>
     <tr class="mat-row" *matNoDataRow>
       <td class="sem-resultado mat-cell" colspan="5">
-        iD
+        <img src="/assets/nao-encontrado.svg" />
         <p>nenhum resultado encontrado</p>
       </td>
     </tr>

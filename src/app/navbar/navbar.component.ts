@@ -1,7 +1,7 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BackendService } from '../services/backend.service';
-import { VerContaCorrente } from '../services/interfaces/conta-corrente';
+import { VerContaCorrente } from '../interfaces/conta-corrente';
 
 @Component({
   selector: 'app-navbar',

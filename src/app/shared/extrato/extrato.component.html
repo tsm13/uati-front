@@ -10,29 +10,29 @@
         vizualizar
         <button
           class="filtro-botao"
-          [ngClass]="{ active: conteudoFiltro.vizualizar === 'todas' }"
-          (click)="filtroBusca('todas')"
+          [ngClass]="{ active: conteudoFiltro.visualizar === 'todas' }"
+          (click)="filtroVisualizar('todas')"
         >
           todas
         </button>
         <button
           class="filtro-botao"
-          [ngClass]="{ active: conteudoFiltro.vizualizar === 'entradas' }"
-          (click)="filtroBusca('entradas')"
+          [ngClass]="{ active: conteudoFiltro.visualizar === 'entradas' }"
+          (click)="filtroVisualizar('entradas')"
         >
           entradas
         </button>
         <button
           class="filtro-botao"
-          [ngClass]="{ active: conteudoFiltro.vizualizar === 'saidas' }"
-          (click)="filtroBusca('saidas')"
+          [ngClass]="{ active: conteudoFiltro.visualizar === 'saídas' }"
+          (click)="filtroVisualizar('saídas')"
         >
           saídas
         </button>
         <button
           class="filtro-botao"
-          [ngClass]="{ active: conteudoFiltro.vizualizar === 'futuros' }"
-          (click)="filtroBusca('futuros')"
+          [ngClass]="{ active: conteudoFiltro.visualizar === 'futuros' }"
+          (click)="filtroVisualizar('futuros')"
         >
           futuros
         </button>
@@ -49,9 +49,9 @@
           (selectionChange)="filtroBusca()"
         >
           <mat-option value="ontem">ontem</mat-option>
-          <mat-option value="7dias">7 dias</mat-option>
-          <mat-option value="30dias">30 dias</mat-option>
-          <mat-option value="90dias">90 dias</mat-option>
+          <mat-option value="7 dias">7 dias</mat-option>
+          <mat-option value="30 dias">30 dias</mat-option>
+          <mat-option value="90 dias">90 dias</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -82,15 +82,24 @@
       </div>
     </div>
   </div>
-  <div class="row busca" *ngIf="filtro">
-    resultado de <b>{{ resultadoDe }}</b> do período
-    <span *ngIf="periodo == 'do último dia'"
-      ><b>{{ periodo }}</b></span
-    >
-    <span *ngIf="periodo != 'do último dia'"
-      >do últimos <b>{{ periodo }}</b> dias</span
-    >
-    para o termo <b>{{ filtro }}</b>
+  <div class="row busca" *ngIf="busca">
+    <span *ngIf="visualizar == 'futuros'"></span>
+    <div *ngIf="visualizar != 'futuros'">
+      resultado
+      <span *ngIf="visualizar == 'todas'">de <b>todas</b> as transações</span>
+      <span *ngIf="visualizar != 'todas' && visualizar != 'futuros'"
+        >das <b>{{ visualizar }}</b></span
+      >
+
+      do período
+      <span *ngIf="periodo == 'ontem'"
+        >de <b>{{ periodo }}</b></span
+      >
+      <span *ngIf="periodo != 'ontem'"
+        >do últimos <b>{{ periodo }}</b></span
+      >
+      para o termo <b>{{ busca }}</b>
+    </div>
   </div>
 
   <mat-accordion>
@@ -111,14 +120,12 @@
         [dados]="dados"
         [colunas]="colunas"
         [hidden]="!mostrarEntradasFuturas"
-        [setDadosFiltro]="conteudoFiltro"
       ></mat-tabela>
       <mat-tabela
         *ngIf="saidasFuturas | async as dados"
         [dados]="dados"
         [colunas]="colunas"
         [hidden]="!mostrarSaidasFuturas"
-        [setDadosFiltro]="conteudoFiltro"
       ></mat-tabela>
     </mat-expansion-panel>
   </mat-accordion>
@@ -128,7 +135,7 @@
     [dados]="dados"
     [colunas]="colunas"
     [hidden]="!mostrarEntradasSaidas"
-    [setDadosFiltro]="conteudoFiltro"
+    [filtrar]="true"
   ></mat-tabela>
   <app-atualizado></app-atualizado>
 </div>

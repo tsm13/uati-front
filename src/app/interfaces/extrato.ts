@@ -16,4 +16,5 @@ export interface ListaExtrato {
 export interface ModuloListaExtrato {
   titulo: string;
   dados: ListaExtrato[];
+  visualizacao: string;
 }
