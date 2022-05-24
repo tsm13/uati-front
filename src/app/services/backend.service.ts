@@ -43,18 +43,3 @@ export class BackendService {
     );
   }
 }
-
-/* mostraExtrato(extrato: Extrato): Observable<ModuloListaExtrato> {
-  return this.http.post<ModuloListaExtrato>(this.extratoURL, extrato).pipe(
-    map((lancamento: ModuloListaExtrato) => {
-      let entradaSaida = lancamento.dados.filter((lancamento) =>
-        formatDate(lancamento.dataLancamento, 'dd/MM/yyyy', 'pt-br')
-      );
-      let modulo = {
-        titulo: 'entradas/saídas',
-        dados: entradaSaida,
-      };
-      return modulo;
-    })
-  );
-} */

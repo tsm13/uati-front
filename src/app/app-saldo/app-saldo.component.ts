@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BackendService } from '../services/backend.service';
-import { Saldo, SaldoTotal } from '../interfaces/saldo';
+import { SaldoTotal } from '../interfaces/saldo';
 
 @Component({
   selector: 'app-saldo',
@@ -10,7 +10,7 @@ import { Saldo, SaldoTotal } from '../interfaces/saldo';
 })
 export class AppSaldoComponent implements OnInit {
   constructor(private service: BackendService) {}
-  saldoPOST: Observable<SaldoTotal>;
+  saldoTotal: Observable<SaldoTotal>;
 
   ngOnInit() {
     this.toDisplay = JSON.parse(localStorage.getItem('display')!);
@@ -23,11 +23,12 @@ export class AppSaldoComponent implements OnInit {
     localStorage.setItem('display', JSON.stringify(this.toDisplay));
   }
 
-  verSaldo() {
-    this.saldoPOST = this.service.mostraSaldo({
+  public verSaldo() {
+    this.saldoTotal = this.service.mostraSaldo({
       agencia: '0123',
       conta: '01234',
       dac: '0',
     });
+    return this.saldoTotal;
   }
 }

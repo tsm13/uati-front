@@ -41,6 +41,10 @@
   left: -11px;
 }
 
+::ng-deep .mat-select-arrow {
+  color: #EC7000 !important;
+}
+
 /* Filtro: Botões */
 .menu-botoes{
   display: flex;

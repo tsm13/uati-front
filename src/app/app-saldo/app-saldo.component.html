@@ -8,7 +8,7 @@
       <p id="titSaldo">saldo em conta</p>
       <div *ngIf="toDisplay; then display; else icon" id="saldo"></div>
       <ng-template #display>
-        <p id="saldo" *ngIf="saldoPOST | async as saldo">
+        <p id="saldo" *ngIf="saldoTotal | async as saldo">
           {{ saldo.saldoTotal | currency }}
         </p>
       </ng-template>

@@ -1,16 +1,12 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { parse, differenceInDays } from 'date-fns';
 import { FiltroService } from 'src/app/services/filtro.service';
 import { ConteudoFiltro } from 'src/app/interfaces/conteudo-filtro';
 import { ListaExtrato, ModuloListaExtrato } from 'src/app/interfaces/extrato';
+import { AppSaldoComponent } from 'src/app/app-saldo/app-saldo.component';
+import { Observable } from 'rxjs';
+import { SaldoTotal } from 'src/app/interfaces/saldo';
 
 @Component({
   selector: 'mat-tabela',
@@ -21,11 +17,13 @@ import { ListaExtrato, ModuloListaExtrato } from 'src/app/interfaces/extrato';
 export class MatTabelaComponent implements OnInit {
   @Input() dataSource: any;
   @Input() dados: ModuloListaExtrato;
-  @Input() colunas: string[];
   @Input() filtrar: boolean = false;
 
+  colunas: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes'];
+
   tituloTabela: string;
-  exibirSaldo = false;
+
+  @Input() exibirSaldo = false;
   dadosOriginal: ModuloListaExtrato;
   public dadosFiltro: ConteudoFiltro;
 
@@ -88,9 +86,20 @@ export class MatTabelaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dadosOriginal = this.dados;
-    this.tituloTabela = this.dados.titulo;
-    this.dataSource = new MatTableDataSource(this.dados.dados);
+    const dados = this.dados;
+    this.dadosOriginal = dados;
+    this.tituloTabela = dados.titulo;
+    this.dataSource = new MatTableDataSource(dados.dados);
+    this.calculaSaldo(dados);
+  }
+
+  lancamentos: ListaExtrato;
+  saldo: AppSaldoComponent;
+  saldoAtual: Observable<SaldoTotal>;
+  public calculaSaldo(dados: any) {
+    this.saldoAtual = new Observable((subscribe) => {
+      subscribe.next(dados);
+    });
   }
 
   private filtrarVizualizar(lancamento: any): boolean {

@@ -7,3 +7,8 @@ export interface Saldo {
 export interface SaldoTotal {
   saldoTotal: number;
 }
+
+export interface SaldosDiarios {
+  saldoAnterior: number;
+  saldoDoDia: number;
+}

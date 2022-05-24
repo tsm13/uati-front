@@ -33,8 +33,14 @@
       <th mat-header-cell *matHeaderCellDef>
         {{ exibirSaldo ? "saldo (R$)" : "" }}
       </th>
-      <td class="saldo pl" mat-cell *matCellDef="let elemento">
-        {{ elemento.saldo != 0 ? (elemento.saldo | currency: "":"") : "" }}
+      <td class="saldo pl" mat-cell *matCellDef="saldo">
+        <span *ngIf="saldoAtual | async as saldo">{{
+          exibirSaldo
+            ? saldo.saldoTotal
+              ? saldo.saldoTotal
+              : (0 | currency: "":"":"")
+            : ""
+        }}</span>
       </td>
     </ng-container>
 

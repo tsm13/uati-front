@@ -9,6 +9,7 @@ export interface ListaExtrato {
   lancamento: string;
   valor: number;
   detalhes: string;
+  saldoTotal: number;
   futuroOuPassado: string;
   entradaOuSaida: string;
 }

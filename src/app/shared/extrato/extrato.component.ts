@@ -24,7 +24,7 @@ export class ExtratoComponent {
   lancamentosFuturosAberto = false;
   dados: ModuloListaExtrato;
 
-  colunas: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes'];
+  /*   colunas: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes']; */
 
   entradasSaidas: Observable<ModuloListaExtrato>;
   entradasFuturas: Observable<ModuloListaExtrato>;

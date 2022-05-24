@@ -118,13 +118,11 @@
       <mat-tabela
         *ngIf="entradasFuturas | async as dados"
         [dados]="dados"
-        [colunas]="colunas"
         [hidden]="!mostrarEntradasFuturas"
       ></mat-tabela>
       <mat-tabela
         *ngIf="saidasFuturas | async as dados"
         [dados]="dados"
-        [colunas]="colunas"
         [hidden]="!mostrarSaidasFuturas"
       ></mat-tabela>
     </mat-expansion-panel>
@@ -133,7 +131,7 @@
     #entradasSaidas
     *ngIf="entradasSaidas | async as dados"
     [dados]="dados"
-    [colunas]="colunas"
+    [exibirSaldo]="true"
     [hidden]="!mostrarEntradasSaidas"
     [filtrar]="true"
   ></mat-tabela>
