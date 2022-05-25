@@ -10,7 +10,14 @@
 
     <ng-container matColumnDef="lancamentos">
       <th mat-header-cell *matHeaderCellDef>lançamentos</th>
-      <td class="lancamentos-titulo pl" mat-cell *matCellDef="let elemento">
+      <td
+        class="lancamentos-titulo pl"
+        mat-cell
+        *matCellDef="let elemento; let saldo"
+      >
+        <span *ngIf="elemento.saldo != elemento.saldoTotal - 1"
+          >Saldo do dia</span
+        >
         {{ elemento.lancamento }}
       </td>
     </ng-container>
@@ -33,14 +40,12 @@
       <th mat-header-cell *matHeaderCellDef>
         {{ exibirSaldo ? "saldo (R$)" : "" }}
       </th>
-      <td class="saldo pl" mat-cell *matCellDef="saldo">
-        <span *ngIf="saldoAtual | async as saldo">{{
+      <td class="saldo pl" mat-cell *matCellDef="let saldo">
+        {{
           exibirSaldo
-            ? saldo.saldoTotal
-              ? saldo.saldoTotal
-              : (0 | currency: "":"":"")
+            ? ((saldo.saldoTotal ? saldo.saldoTotal : 0) | currency: "":"":"")
             : ""
-        }}</span>
+        }}
       </td>
     </ng-container>
 

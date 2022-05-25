@@ -1,87 +1,59 @@
-
-.dvPrincipal {
+.titulo-extrato {
   margin-top: 40px;
-}
-
-.dvInfo, #saldo, #btnSpan, #idObs, h1 {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-h1 {
+  font-size: 32px;
   font-weight: bold;
 }
 
-.dvInfo {
-  display: flex;
-  border-top: 1px solid rgb(214, 208, 204);
-  border-bottom: 1px solid rgb(214, 208, 204);
-  margin-top: -10px;
+.subtitulo {
+  margin: 5px 0;
 }
 
-p {
+.saldo {
+  color: rgb(0, 122, 71);
+  text-align: left;
+}
+
+.box p {
   font-weight: 800;
   size: 16px;
-  line-height: 24px;
 }
 
-#titSaldo {
-  margin-top: 15px;
-  margin-bottom: -10px;
+.box {
+  display: flex;
+  border-top: 1px solid #d6d0cc;
+  border-bottom: 1px solid #d6d0cc;
+  justify-content: space-between;
+  align-items: center;
+  height: 82px;
 }
 
-#saldo {
-  color: rgb(0, 122, 71);
-  width: 136px;
-  height: 24px;
-  margin-top: 14px;
-  margin-bottom: 17px;
-
+.box-saldo {
+  border-right: 1px solid #EFE9E5;
+  padding-right: 25px;
 }
 
-#icon {
-  margin-top: 16px;
-  margin-bottom: 15px;
-  width: 136px;
-}
-
-#dvButton {
-  width: 05%;
-  text-align: right;
-}
-
-
-.botao {
+.box-botao {
+  width: 80px;
+  height: 60px;
   color: rgb(16, 110, 176);
+  border-left: 1px solid #EFE9E5;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
-.dvSaldo {
-  width: 15%;
-}
-
-#btnSpan {
-  margin-top: -20px;
+.button-toggle {
   text-decoration: underline;
+  display: block;
 }
 
-#idIcon {
-  margin-top: 20px;
-}
-
-button {
-  background-color: white;
-}
-
-#idObs {
-  color: rgb(86, 80, 76);
+.texto-footer {
+  color: #56504c;
   size: 14px;
   margin-top: 10px;
   margin-bottom: 30px;
 }
 
-#detalhe {
-  margin-top: 15px;
-  width: 80%;
-  height: 50px;
-  border-left: 1px solid rgb(214, 208, 204);
-  border-right: 1px solid rgb(214, 208, 204);
-}

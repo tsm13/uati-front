@@ -1,55 +1,33 @@
-<div class="dvPrincipal">
-  <div>
-    <h1>extrato</h1>
+<h1 class="titulo-extrato">extrato</h1>
+
+<div class="box">
+  <div class="box-saldo">
+    <p class="subtitulo">saldo em conta</p>
+    <div *ngIf="toDisplay; then display; else icon" id="saldo"></div>
+    <ng-template #display>
+      <p class="saldo" *ngIf="saldoTotal | async as saldo">
+        {{ saldo.saldoTotal | currency }}
+      </p>
+    </ng-template>
+    <ng-template #icon>
+      <mat-icon id="icon">visibility_off</mat-icon>
+    </ng-template>
   </div>
 
-  <div class="dvInfo">
-    <div class="dvSaldo">
-      <p id="titSaldo">saldo em conta</p>
-      <div *ngIf="toDisplay; then display; else icon" id="saldo"></div>
-      <ng-template #display>
-        <p id="saldo" *ngIf="saldoTotal | async as saldo">
-          {{ saldo.saldoTotal | currency }}
-        </p>
-      </ng-template>
-      <ng-template #icon>
-        <mat-icon id="icon">visibility_off</mat-icon>
-      </ng-template>
+  <div class="box-botao" (click)="hide()" *ngIf="toDisplay; else oculto">
+    <mat-icon>visibility</mat-icon>
+    <span class="button-toggle">ocultar</span>
+  </div>
+
+  <ng-template #oculto>
+    <div (click)="hide()" class="box-botao">
+      <mat-icon>visibility_off</mat-icon>
+      <span class="button-toggle">exibir</span>
     </div>
+  </ng-template>
+</div>
 
-    <div id="detalhe"></div>
-
-    <div id="dvButton">
-      <button mat-icon-button (click)="hide()" *ngIf="toDisplay; else oculto">
-        <div class="botao">
-          <div id="idIcon">
-            <mat-icon>visibility</mat-icon>
-          </div>
-          <div id="btnSpan">
-            <span>ocultar</span>
-          </div>
-        </div>
-      </button>
-
-      <ng-template #oculto>
-        <button mat-icon-button (click)="hide()">
-          <div class="botao">
-            <div id="idIcon">
-              <mat-icon>visibility_off</mat-icon>
-            </div>
-            <div id="btnSpan">
-              <span>exibir</span>
-            </div>
-          </div>
-        </button>
-      </ng-template>
-    </div>
-  </div>
-
-  <div id="idObs">
-    <span
-      >* Total contratado. A utilização do cheque especial e cheque especial
-      adicional está sujeita a encargos.</span
-    >
-  </div>
+<div class="texto-footer">
+  * Total contratado. A utilização do cheque especial e cheque especial
+  adicional está sujeita a encargos.
 </div>

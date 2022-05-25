@@ -7,6 +7,7 @@ import { ListaExtrato, ModuloListaExtrato } from 'src/app/interfaces/extrato';
 import { AppSaldoComponent } from 'src/app/app-saldo/app-saldo.component';
 import { Observable } from 'rxjs';
 import { SaldoTotal } from 'src/app/interfaces/saldo';
+import { BackendService } from 'src/app/services/backend.service';
 
 @Component({
   selector: 'mat-tabela',
@@ -27,7 +28,12 @@ export class MatTabelaComponent implements OnInit {
   dadosOriginal: ModuloListaExtrato;
   public dadosFiltro: ConteudoFiltro;
 
-  constructor(private filtroService: FiltroService) {
+  private saldoConta: number = 0;
+
+  constructor(
+    private filtroService: FiltroService,
+    private backendService: BackendService
+  ) {
     this.filtroService.data.subscribe((observer: any) => {
       /*       console.log(observer); */
       if (observer && this.dados && this.filtrar) {
@@ -86,20 +92,26 @@ export class MatTabelaComponent implements OnInit {
   }
 
   ngOnInit() {
-    const dados = this.dados;
+    /*     const dados = this.dados; */
+    let dados = this.dados;
+
     this.dadosOriginal = dados;
     this.tituloTabela = dados.titulo;
     this.dataSource = new MatTableDataSource(dados.dados);
-    this.calculaSaldo(dados);
-  }
+    /*     this.calculaSaldo(dados); */
 
-  lancamentos: ListaExtrato;
-  saldo: AppSaldoComponent;
-  saldoAtual: Observable<SaldoTotal>;
-  public calculaSaldo(dados: any) {
-    this.saldoAtual = new Observable((subscribe) => {
-      subscribe.next(dados);
-    });
+    if (this.exibirSaldo) {
+      this.backendService
+        .mostraSaldo({
+          agencia: '0123',
+          conta: '01234',
+          dac: '0',
+        })
+        .subscribe((observer: any) => {
+          this.saldoConta = observer.saldoTotal;
+          dados.dados = this.calculandoSaldo(dados.dados);
+        });
+    }
   }
 
   private filtrarVizualizar(lancamento: any): boolean {
@@ -120,4 +132,24 @@ export class MatTabelaComponent implements OnInit {
     }
     return false;
   }
+
+  private calculandoSaldo(dados: any): any {
+    let saldo: number = this.saldoConta;
+    // dados = this.ordernandoDatas(dados);
+    dados = dados.reverse().map((item: any, index: number) => {
+      if (index > 0) {
+        saldo = saldo - item.valor;
+      }
+      item.saldoTotal = saldo;
+      return item;
+    });
+    return dados.reverse();
+  }
+
+  /*   saldoAtual: Observable<SaldoTotal>;
+  public calculaSaldo(dados: any) {
+    this.saldoAtual = new Observable((subscribe) => {
+      subscribe.next(dados);
+    });
+  } */
 }
