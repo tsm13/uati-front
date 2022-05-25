@@ -10,14 +10,7 @@
 
     <ng-container matColumnDef="lancamentos">
       <th mat-header-cell *matHeaderCellDef>lançamentos</th>
-      <td
-        class="lancamentos-titulo pl"
-        mat-cell
-        *matCellDef="let elemento; let saldo"
-      >
-        <span *ngIf="elemento.saldo != elemento.saldoTotal - 1"
-          >Saldo do dia</span
-        >
+      <td class="lancamentos-titulo pl" mat-cell *matCellDef="let elemento">
         {{ elemento.lancamento }}
       </td>
     </ng-container>
