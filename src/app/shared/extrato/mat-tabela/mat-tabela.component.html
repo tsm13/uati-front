@@ -8,12 +8,23 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="lancamentos">
+    <!--     <ng-container matColumnDef="lancamentos">
       <th mat-header-cell *matHeaderCellDef>lançamentos</th>
       <td class="lancamentos-titulo pl" mat-cell *matCellDef="let elemento">
         {{ elemento.lancamento }}
       </td>
-    </ng-container>
+    </ng-container> -->
+
+    <ng-container matColumnDef="lancamentos">
+      <th mat-header-cell *matHeaderCellDef>lançamentos</th>
+
+      <td class="lancamentos-titulo pl" mat-cell *matCellDef="let elemento">
+        <span *ngIf="diaDiferente(); then saldo; else lancamentos"> </span>
+        <ng-template #saldo>Saldo do Dia</ng-template>
+
+        <ng-template #lancamentos>{{ elemento.lancamento }}</ng-template>
+      </td></ng-container
+    >
 
     <ng-container matColumnDef="valor">
       <th class="col-valor" mat-header-cell *matHeaderCellDef>valor (R$)</th>

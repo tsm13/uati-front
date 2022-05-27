@@ -4,9 +4,6 @@ import { parse, differenceInDays } from 'date-fns';
 import { FiltroService } from 'src/app/services/filtro.service';
 import { ConteudoFiltro } from 'src/app/interfaces/conteudo-filtro';
 import { ListaExtrato, ModuloListaExtrato } from 'src/app/interfaces/extrato';
-import { AppSaldoComponent } from 'src/app/app-saldo/app-saldo.component';
-import { Observable } from 'rxjs';
-import { SaldoTotal } from 'src/app/interfaces/saldo';
 import { BackendService } from 'src/app/services/backend.service';
 
 @Component({
@@ -135,15 +132,27 @@ export class MatTabelaComponent implements OnInit {
 
   private calculandoSaldo(dados: any): any {
     let saldo: number = this.saldoConta;
-    // dados = this.ordernandoDatas(dados);
     dados = dados.reverse().map((item: any, index: number) => {
-      if (index > 0) {
-        saldo = saldo - item.valor;
+      if (index === 0) {
+        item.saldoTotal = saldo;
+      } else {
+        item.saldoTotal = dados[index - 1].saldoTotal - dados[index - 1].valor;
       }
-      item.saldoTotal = saldo;
       return item;
     });
     return dados.reverse();
+  }
+
+  public diaDiferente() {
+    this.dados.dados.map((lancamento: ListaExtrato, index: number) => {
+      if (
+        this.dados.dados[index].dataLancamento === lancamento.dataLancamento
+      ) {
+        this.dataSource.push = [];
+        return true;
+      }
+      return false;
+    });
   }
 
   /*   saldoAtual: Observable<SaldoTotal>;
