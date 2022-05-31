@@ -4,9 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AppSaldoComponent } from './app-saldo/app-saldo.component';
 import { AtualizadoComponent } from './shared/extrato/atualizado/atualizado.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SaldoComponent } from './saldo/saldo.component';
 import { MatTabelaComponent } from './shared/extrato/mat-tabela/mat-tabela.component';
 import { RodapeComponent } from './rodape/rodape.component';
 
@@ -26,8 +26,8 @@ import ptBr from '@angular/common/locales/pt';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { ExtratoComponent } from './shared/extrato/extrato.component';
 import { FormsModule } from '@angular/forms';
-import { BackendService } from './services/backend.service';
-import { FiltroService } from './services/filtro.service';
+import { BackendService } from './shared/services/backend.service';
+import { FiltroService } from './shared/services/filtro.service';
 
 registerLocaleData(ptBr);
 
@@ -35,7 +35,7 @@ registerLocaleData(ptBr);
   declarations: [
     AppComponent,
     NavbarComponent,
-    AppSaldoComponent,
+    SaldoComponent,
     MatTabelaComponent,
     RodapeComponent,
     AtualizadoComponent,

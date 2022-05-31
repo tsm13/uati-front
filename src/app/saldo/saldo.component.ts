@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BackendService } from '../services/backend.service';
+import { BackendService } from '../shared/services/backend.service';
 import { SaldoTotal } from '../interfaces/saldo';
 
 @Component({
   selector: 'app-saldo',
-  templateUrl: './app-saldo.component.html',
-  styleUrls: ['./app-saldo.component.scss'],
+  templateUrl: './saldo.component.html',
+  styleUrls: ['./saldo.component.scss'],
 })
-export class AppSaldoComponent implements OnInit {
+export class SaldoComponent implements OnInit {
   constructor(private service: BackendService) {}
   saldoTotal: Observable<SaldoTotal>;
 

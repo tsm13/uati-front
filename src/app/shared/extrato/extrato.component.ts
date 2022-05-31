@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { BackendService } from 'src/app/services/backend.service';
+import { BackendService } from 'src/app/shared/services/backend.service';
 import { ModuloListaExtrato } from 'src/app/interfaces/extrato';
 
-import { FiltroService } from 'src/app/services/filtro.service';
+import { FiltroService } from 'src/app/shared/services/filtro.service';
 import { ConteudoFiltro } from 'src/app/interfaces/conteudo-filtro';
 
 @Component({
@@ -12,19 +12,7 @@ import { ConteudoFiltro } from 'src/app/interfaces/conteudo-filtro';
   styleUrls: ['./extrato.component.scss'],
 })
 export class ExtratoComponent {
-  constructor(
-    private service: BackendService,
-    private filtroService: FiltroService
-  ) {
-    this.filtroService.data.subscribe((observer: any) => {
-      /* console.log(observer); */
-    });
-  }
-
   lancamentosFuturosAberto = false;
-  dados: ModuloListaExtrato;
-
-  /*   colunas: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes']; */
 
   entradasSaidas: Observable<ModuloListaExtrato>;
   entradasFuturas: Observable<ModuloListaExtrato>;
@@ -36,6 +24,11 @@ export class ExtratoComponent {
     ordenacao: 'maisAntigo',
     busca: null,
   };
+
+  constructor(
+    private service: BackendService,
+    private filtroService: FiltroService
+  ) {}
 
   ngOnInit(): void {
     this.entradasSaidas = this.service

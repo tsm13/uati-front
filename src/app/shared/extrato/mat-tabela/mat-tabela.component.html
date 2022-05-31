@@ -1,5 +1,5 @@
 <div class="row">
-  <p class="b pl">{{ tituloTabela }}</p>
+  <p class="bold-700 pl">{{ tituloTabela }}</p>
   <table mat-table [dataSource]="dataSource" class="tabela striped">
     <ng-container matColumnDef="data">
       <th mat-header-cell *matHeaderCellDef>data</th>
@@ -12,9 +12,9 @@
       <th mat-header-cell *matHeaderCellDef>lançamentos</th>
       <td
         class="lancamentos-titulo pl"
+        [ngClass]="{ 'bold-700': elemento.isSaldo }"
         mat-cell
         *matCellDef="let elemento"
-        [ngClass]="{ b: elemento.isSaldo }"
       >
         {{ elemento.lancamento }}
       </td>
@@ -54,7 +54,7 @@
 
     <tr mat-header-row *matHeaderRowDef="colunas"></tr>
     <tr mat-row *matRowDef="let linha; columns: colunas"></tr>
-    <!--     <tr mat-row *matRowDefWhen="let saldo; columns: colunas"></tr> -->
+
     <tr class="mat-row" *matNoDataRow>
       <td class="sem-resultado mat-cell" colspan="5">
         <img src="/assets/nao-encontrado.svg" />

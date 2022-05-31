@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { parse, differenceInDays } from 'date-fns';
-import { FiltroService } from 'src/app/services/filtro.service';
+import { FiltroService } from 'src/app/shared/services/filtro.service';
 import { ConteudoFiltro } from 'src/app/interfaces/conteudo-filtro';
 import { ListaExtrato, ModuloListaExtrato } from 'src/app/interfaces/extrato';
-import { BackendService } from 'src/app/services/backend.service';
+import { BackendService } from 'src/app/shared/services/backend.service';
 
 @Component({
   selector: 'mat-tabela',
@@ -17,7 +17,6 @@ export class MatTabelaComponent implements OnInit {
   @Input() dados: ModuloListaExtrato;
   @Input() filtrar: boolean;
   @Input() exibirSaldo: boolean;
-  hoje = Date.now().toString;
 
   tituloTabela: string;
   colunas: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes'];
@@ -25,6 +24,7 @@ export class MatTabelaComponent implements OnInit {
   dadosOriginal: ModuloListaExtrato;
   public dadosFiltro: ConteudoFiltro;
   private saldoConta: number = 0;
+  saldoAnterior = this.saldoConta;
 
   constructor(
     private filtroService: FiltroService,
@@ -34,18 +34,18 @@ export class MatTabelaComponent implements OnInit {
       if (observer && this.dados && this.filtrar) {
         this.dados = this.dadosOriginal;
         this.dadosFiltro = observer;
+
         const filtrados = this.dados.dados.filter(
           (lancamento: ListaExtrato) => {
-            let dias = 0;
+            let dias = this.periodoEmDias();
 
-            if (this.dadosFiltro.periodo === 'ontem') {
-              dias = 1;
-            } else if (this.dadosFiltro.periodo === '7 dias') {
-              dias = 7;
-            } else if (this.dadosFiltro.periodo === '30 dias') {
-              dias = 30;
-            } else if (this.dadosFiltro.periodo === '90 dias') {
-              dias = 90;
+            if (
+              differenceInDays(
+                new Date(),
+                parse(lancamento.dataLancamento, 'dd/MM/yyyy', new Date())
+              ) <= dias
+            ) {
+              this.saldoAnterior += lancamento.valor;
             }
 
             parse(lancamento.dataLancamento, 'dd/MM/yyyy', new Date());
@@ -78,8 +78,7 @@ export class MatTabelaComponent implements OnInit {
               +parse(x.dataLancamento, 'dd/MM/yyyy', new Date())
           );
         }
-        /*         console.log(filtrados);
-        console.log(this.dadosFiltro); */
+
         this.dataSource = new MatTableDataSource(filtrados);
         this.dataSource.filter = this.dadosFiltro.busca?.trim();
       }
@@ -102,7 +101,6 @@ export class MatTabelaComponent implements OnInit {
         .subscribe((observer: any) => {
           this.saldoConta = observer.saldoTotal;
           dados.dados = this.calculandoSaldo(dados.dados);
-          console.log(dados.dados);
 
           let count = 0;
           while (dados.dados[count]) {
@@ -111,9 +109,18 @@ export class MatTabelaComponent implements OnInit {
           }
           dados.dados.forEach((value, index) => {
             this.setDados(value, index);
-            console.log(index);
+            let dias = this.periodoEmDias();
+            // let dias = 7;
+            if (
+              differenceInDays(
+                new Date(),
+                parse(value.dataLancamento, 'dd/MM/yyyy', new Date())
+              ) <= dias
+            ) {
+              this.saldoAnterior += value.valor;
+            }
 
-            if (index === 0) {
+            if (index === dias) {
               this.dados.dados.splice(0 + 0, 0, {
                 dataLancamento: value.dataLancamento,
                 detalhes: '',
@@ -126,7 +133,7 @@ export class MatTabelaComponent implements OnInit {
               });
             }
 
-            while (!this.dados.dados[index + 2]) {
+            if (!this.dados.dados[index + 2]) {
               this.dados.dados.push({
                 dataLancamento: this.dados.dados[index + 1].dataLancamento,
                 detalhes: '',
@@ -141,6 +148,23 @@ export class MatTabelaComponent implements OnInit {
           });
           this.dataSource = new MatTableDataSource(dados.dados);
         });
+    }
+  }
+
+  private periodoEmDias() {
+    let dias = 0;
+
+    switch (this.dadosFiltro.periodo) {
+      case 'ontem':
+        return (dias = 1);
+      case '7 dias':
+        return (dias = 7);
+      case '30 dias':
+        return (dias = 30);
+      case '90 dias':
+        return (dias = 90);
+      default:
+        return dias;
     }
   }
 
@@ -194,24 +218,4 @@ export class MatTabelaComponent implements OnInit {
     });
     return dados.reverse();
   }
-
-  public diaDiferente() {
-    const data = this.dados.dados;
-    this.dados.dados.map((lancamento: ListaExtrato, index: number) => {
-      if (this.dados.dados[index].dataLancamento != lancamento.dataLancamento) {
-        /*         data.push(lancamento.dataLancamento);
-        this.dataSource.data = data;
-        this.dataSource.data.push(this.dados.dados[1]); */
-        return true;
-      }
-      return false;
-    });
-  }
-
-  /*   saldoAtual: Observable<SaldoTotal>;
-  public calculaSaldo(dados: any) {
-    this.saldoAtual = new Observable((subscribe) => {
-      subscribe.next(dados);
-    });
-  } */
 }
