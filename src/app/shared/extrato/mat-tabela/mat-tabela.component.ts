@@ -15,16 +15,15 @@ import { BackendService } from 'src/app/services/backend.service';
 export class MatTabelaComponent implements OnInit {
   @Input() dataSource: any;
   @Input() dados: ModuloListaExtrato;
-  @Input() filtrar: boolean = false;
-
-  colunas: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes'];
+  @Input() filtrar: boolean;
+  @Input() exibirSaldo: boolean;
+  hoje = Date.now().toString;
 
   tituloTabela: string;
+  colunas: string[] = ['data', 'lancamentos', 'valor', 'saldo', 'detalhes'];
 
-  @Input() exibirSaldo = false;
   dadosOriginal: ModuloListaExtrato;
   public dadosFiltro: ConteudoFiltro;
-
   private saldoConta: number = 0;
 
   constructor(
@@ -32,7 +31,6 @@ export class MatTabelaComponent implements OnInit {
     private backendService: BackendService
   ) {
     this.filtroService.data.subscribe((observer: any) => {
-      /*       console.log(observer); */
       if (observer && this.dados && this.filtrar) {
         this.dados = this.dadosOriginal;
         this.dadosFiltro = observer;
@@ -89,13 +87,10 @@ export class MatTabelaComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*     const dados = this.dados; */
     let dados = this.dados;
-
     this.dadosOriginal = dados;
     this.tituloTabela = dados.titulo;
     this.dataSource = new MatTableDataSource(dados.dados);
-    /*     this.calculaSaldo(dados); */
 
     if (this.exibirSaldo) {
       this.backendService
@@ -107,7 +102,64 @@ export class MatTabelaComponent implements OnInit {
         .subscribe((observer: any) => {
           this.saldoConta = observer.saldoTotal;
           dados.dados = this.calculandoSaldo(dados.dados);
+          console.log(dados.dados);
+
+          let count = 0;
+          while (dados.dados[count]) {
+            this.setDados(dados.dados[count], count);
+            count++;
+          }
+          dados.dados.forEach((value, index) => {
+            this.setDados(value, index);
+            console.log(index);
+
+            if (index === 0) {
+              this.dados.dados.splice(0 + 0, 0, {
+                dataLancamento: value.dataLancamento,
+                detalhes: '',
+                entradaOuSaida: '',
+                futuroOuPassado: '',
+                lancamento: 'SALDO ANTERIOR',
+                saldoTotal: value.saldoTotal + value.valor * -1,
+                valor: 0,
+                isSaldo: true,
+              });
+            }
+
+            while (!this.dados.dados[index + 2]) {
+              this.dados.dados.push({
+                dataLancamento: this.dados.dados[index + 1].dataLancamento,
+                detalhes: '',
+                entradaOuSaida: '',
+                futuroOuPassado: '',
+                lancamento: 'SALDO DO DIA',
+                saldoTotal: this.saldoConta,
+                valor: 0,
+                isSaldo: true,
+              });
+            }
+          });
+          this.dataSource = new MatTableDataSource(dados.dados);
         });
+    }
+  }
+
+  private setDados(value: ListaExtrato, index: number) {
+    if (
+      this.dados.dados[index + 1] &&
+      value.dataLancamento !== this.dados.dados[index + 1].dataLancamento &&
+      !this.dados.dados[index].isSaldo
+    ) {
+      this.dados.dados.splice(index + 1, 0, {
+        dataLancamento: value.dataLancamento,
+        detalhes: '',
+        entradaOuSaida: '',
+        futuroOuPassado: '',
+        lancamento: 'SALDO DO DIA',
+        saldoTotal: value.saldoTotal,
+        valor: 0,
+        isSaldo: true,
+      });
     }
   }
 
@@ -144,11 +196,12 @@ export class MatTabelaComponent implements OnInit {
   }
 
   public diaDiferente() {
+    const data = this.dados.dados;
     this.dados.dados.map((lancamento: ListaExtrato, index: number) => {
-      if (
-        this.dados.dados[index].dataLancamento === lancamento.dataLancamento
-      ) {
-        this.dataSource.push = [];
+      if (this.dados.dados[index].dataLancamento != lancamento.dataLancamento) {
+        /*         data.push(lancamento.dataLancamento);
+        this.dataSource.data = data;
+        this.dataSource.data.push(this.dados.dados[1]); */
         return true;
       }
       return false;
