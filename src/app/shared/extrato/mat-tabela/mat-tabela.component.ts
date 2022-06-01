@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { parse, differenceInDays } from 'date-fns';
+import { parse, differenceInDays, subDays, format } from 'date-fns';
 import { FiltroService } from 'src/app/shared/services/filtro.service';
 import { ConteudoFiltro } from 'src/app/interfaces/conteudo-filtro';
 import { ListaExtrato, ModuloListaExtrato } from 'src/app/interfaces/extrato';
@@ -25,6 +25,8 @@ export class MatTabelaComponent implements OnInit {
   public dadosFiltro: ConteudoFiltro;
   private saldoConta: number = 0;
   saldoAnterior = this.saldoConta;
+  private periodoDias: any;
+  private linhaSaldoAnterior: any;
 
   constructor(
     private filtroService: FiltroService,
@@ -34,18 +36,19 @@ export class MatTabelaComponent implements OnInit {
       if (observer && this.dados && this.filtrar) {
         this.dados = this.dadosOriginal;
         this.dadosFiltro = observer;
+        this.periodoDias = this.dadosFiltro.periodo;
 
+        let saldoAnterior = this.saldoAnterior;
         const filtrados = this.dados.dados.filter(
           (lancamento: ListaExtrato) => {
-            let dias = this.periodoEmDias();
-
+            let dias = this.periodoEmDias(this.periodoDias);
             if (
               differenceInDays(
                 new Date(),
                 parse(lancamento.dataLancamento, 'dd/MM/yyyy', new Date())
-              ) <= dias
+              ) >= dias
             ) {
-              this.saldoAnterior += lancamento.valor;
+              saldoAnterior += lancamento.valor;
             }
 
             parse(lancamento.dataLancamento, 'dd/MM/yyyy', new Date());
@@ -70,6 +73,31 @@ export class MatTabelaComponent implements OnInit {
             );
           }
         );
+
+        let parseData = parse(
+          filtrados[0].dataLancamento,
+          'dd/MM/yyyy',
+          new Date()
+        );
+
+        let umDiaAntes = subDays(new Date(parseData), 1);
+        let formatData = format(umDiaAntes, 'dd/MM/yyyy');
+        console.log(formatData);
+        this.linhaSaldoAnterior = {
+          dataLancamento: formatData,
+          detalhes: '',
+          entradaOuSaida: '',
+          futuroOuPassado: '',
+          lancamento: 'SALDO ANTERIOR',
+          saldoTotal: filtrados[0].saldoTotal - filtrados[0].valor,
+          valor: 0,
+          isSaldo: true,
+        };
+
+        // filtrados[0].saldoTotal - filtrados[0].valor
+        //     saldoTotal: saldoAnterior + filtrados[1].saldoTotal,
+
+        filtrados.splice(0, 0, this.linhaSaldoAnterior);
 
         if (this.dadosFiltro.ordenacao === 'maisRecente') {
           filtrados.sort(
@@ -109,8 +137,7 @@ export class MatTabelaComponent implements OnInit {
           }
           dados.dados.forEach((value, index) => {
             this.setDados(value, index);
-            let dias = this.periodoEmDias();
-            // let dias = 7;
+            let dias = this.periodoEmDias(this.periodoDias);
             if (
               differenceInDays(
                 new Date(),
@@ -120,14 +147,14 @@ export class MatTabelaComponent implements OnInit {
               this.saldoAnterior += value.valor;
             }
 
-            if (index === dias) {
-              this.dados.dados.splice(0 + 0, 0, {
+            if (index === dias && dias === 0) {
+              this.dados.dados.splice(0, 0, {
                 dataLancamento: value.dataLancamento,
                 detalhes: '',
                 entradaOuSaida: '',
                 futuroOuPassado: '',
-                lancamento: 'SALDO ANTERIOR',
-                saldoTotal: value.saldoTotal + value.valor * -1,
+                lancamento: 'SALDO ANTERIOR (On-Init)',
+                saldoTotal: dados.dados[0].saldoTotal - dados.dados[0].valor,
                 valor: 0,
                 isSaldo: true,
               });
@@ -151,10 +178,10 @@ export class MatTabelaComponent implements OnInit {
     }
   }
 
-  private periodoEmDias() {
+  private periodoEmDias(periodo: string) {
     let dias = 0;
 
-    switch (this.dadosFiltro.periodo) {
+    switch (periodo) {
       case 'ontem':
         return (dias = 1);
       case '7 dias':
