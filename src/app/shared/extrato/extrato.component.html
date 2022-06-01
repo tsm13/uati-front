@@ -83,7 +83,9 @@
     </div>
   </div>
   <div class="row busca" *ngIf="busca">
-    <span *ngIf="visualizar == 'futuros'"></span>
+    <span *ngIf="visualizar == 'futuros'"
+      >lançamentos futuros não podem ser filtrados</span
+    >
     <div *ngIf="visualizar != 'futuros'">
       resultado
       <span *ngIf="visualizar == 'todas'">de <b>todas</b> as transações</span>

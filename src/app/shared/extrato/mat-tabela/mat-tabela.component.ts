@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { parse, differenceInDays, subDays, format } from 'date-fns';
+import { parse, differenceInDays } from 'date-fns';
 import { FiltroService } from 'src/app/shared/services/filtro.service';
 import { ConteudoFiltro } from 'src/app/interfaces/conteudo-filtro';
 import { ListaExtrato, ModuloListaExtrato } from 'src/app/interfaces/extrato';
@@ -38,66 +38,65 @@ export class MatTabelaComponent implements OnInit {
         this.dadosFiltro = observer;
         this.periodoDias = this.dadosFiltro.periodo;
 
-        let saldoAnterior = this.saldoAnterior;
-        const filtrados = this.dados.dados.filter(
-          (lancamento: ListaExtrato) => {
-            let dias = this.periodoEmDias(this.periodoDias);
-            if (
-              differenceInDays(
-                new Date(),
-                parse(lancamento.dataLancamento, 'dd/MM/yyyy', new Date())
-              ) >= dias
-            ) {
-              saldoAnterior += lancamento.valor;
-            }
+        // let saldoAnterior = this.saldoAnterior;
+        let filtrados = this.dados.dados.filter((lancamento: ListaExtrato) => {
+          let dias = this.periodoEmDias(this.periodoDias);
+          let difDias = differenceInDays(
+            new Date(),
+            parse(lancamento.dataLancamento, 'dd/MM/yyyy', new Date())
+          );
+          if (difDias === 0 && this.dadosFiltro.periodo === 'ontem') {
+            return false;
+          }
 
-            parse(lancamento.dataLancamento, 'dd/MM/yyyy', new Date());
-
+          return (
             differenceInDays(
               new Date(),
               parse(lancamento.dataLancamento, 'dd/MM/yyyy', new Date())
-            );
-            let difDias = differenceInDays(
+            ) <= dias && this.filtrarVizualizar(lancamento)
+          );
+        });
+
+        let dias = this.periodoEmDias(this.periodoDias);
+
+        const lancamentosAnteriores = this.dados.dados.filter((value) => {
+          return (
+            differenceInDays(
               new Date(),
-              parse(lancamento.dataLancamento, 'dd/MM/yyyy', new Date())
-            );
-            if (difDias === 0 && this.dadosFiltro.periodo === 'ontem') {
-              return false;
-            }
+              parse(value.dataLancamento, 'dd/MM/yyyy', new Date())
+            ) > dias
+          );
+        });
 
-            return (
-              differenceInDays(
-                new Date(),
-                parse(lancamento.dataLancamento, 'dd/MM/yyyy', new Date())
-              ) <= dias && this.filtrarVizualizar(lancamento)
-            );
-          }
-        );
-
-        let parseData = parse(
-          filtrados[0].dataLancamento,
-          'dd/MM/yyyy',
-          new Date()
-        );
-
-        let umDiaAntes = subDays(new Date(parseData), 1);
-        let formatData = format(umDiaAntes, 'dd/MM/yyyy');
-        console.log(formatData);
         this.linhaSaldoAnterior = {
-          dataLancamento: formatData,
+          dataLancamento:
+            lancamentosAnteriores[lancamentosAnteriores.length - 1]
+              .dataLancamento,
           detalhes: '',
           entradaOuSaida: '',
           futuroOuPassado: '',
           lancamento: 'SALDO ANTERIOR',
-          saldoTotal: filtrados[0].saldoTotal - filtrados[0].valor,
+          saldoTotal:
+            lancamentosAnteriores[lancamentosAnteriores.length - 1].saldoTotal,
           valor: 0,
           isSaldo: true,
         };
 
-        // filtrados[0].saldoTotal - filtrados[0].valor
-        //     saldoTotal: saldoAnterior + filtrados[1].saldoTotal,
-
-        filtrados.splice(0, 0, this.linhaSaldoAnterior);
+        if (this.dadosFiltro.visualizar === 'todas') {
+          filtrados.splice(0, 0, this.linhaSaldoAnterior);
+          if (dias > 1) {
+            filtrados.push({
+              dataLancamento: filtrados[filtrados.length - 1].dataLancamento,
+              detalhes: '',
+              entradaOuSaida: '',
+              futuroOuPassado: '',
+              lancamento: 'SALDO DO DIA',
+              saldoTotal: filtrados[filtrados.length - 1].saldoTotal,
+              valor: 0,
+              isSaldo: true,
+            });
+          }
+        }
 
         if (this.dadosFiltro.ordenacao === 'maisRecente') {
           filtrados.sort(
@@ -135,45 +134,48 @@ export class MatTabelaComponent implements OnInit {
             this.setDados(dados.dados[count], count);
             count++;
           }
-          dados.dados.forEach((value, index) => {
-            this.setDados(value, index);
-            let dias = this.periodoEmDias(this.periodoDias);
-            if (
+
+          const todosLanc = dados.dados.filter((value) => {
+            return (
               differenceInDays(
                 new Date(),
                 parse(value.dataLancamento, 'dd/MM/yyyy', new Date())
-              ) <= dias
-            ) {
-              this.saldoAnterior += value.valor;
-            }
-
-            if (index === dias && dias === 0) {
-              this.dados.dados.splice(0, 0, {
-                dataLancamento: value.dataLancamento,
-                detalhes: '',
-                entradaOuSaida: '',
-                futuroOuPassado: '',
-                lancamento: 'SALDO ANTERIOR (On-Init)',
-                saldoTotal: dados.dados[0].saldoTotal - dados.dados[0].valor,
-                valor: 0,
-                isSaldo: true,
-              });
-            }
-
-            if (!this.dados.dados[index + 2]) {
-              this.dados.dados.push({
-                dataLancamento: this.dados.dados[index + 1].dataLancamento,
-                detalhes: '',
-                entradaOuSaida: '',
-                futuroOuPassado: '',
-                lancamento: 'SALDO DO DIA',
-                saldoTotal: this.saldoConta,
-                valor: 0,
-                isSaldo: true,
-              });
-            }
+              ) >= 90
+            );
           });
-          this.dataSource = new MatTableDataSource(dados.dados);
+
+          let lancFiltrados = dados.dados.filter(
+            (value) =>
+              differenceInDays(
+                new Date(),
+                parse(value.dataLancamento, 'dd/MM/yyyy', new Date())
+              ) < 90
+          );
+
+          // let saldoDoDia = todosLanc[todosLanc.length - 1];
+          lancFiltrados.splice(0, 0, {
+            dataLancamento: todosLanc[todosLanc.length - 1].dataLancamento,
+            detalhes: '',
+            entradaOuSaida: '',
+            futuroOuPassado: '',
+            lancamento: 'SALDO ANTERIOR',
+            saldoTotal: todosLanc[todosLanc.length - 1].saldoTotal,
+            valor: 0,
+            isSaldo: true,
+          });
+
+          lancFiltrados.push({
+            dataLancamento:
+              lancFiltrados[lancFiltrados.length - 1].dataLancamento,
+            detalhes: '',
+            entradaOuSaida: '',
+            futuroOuPassado: '',
+            lancamento: 'SALDO DO DIA',
+            saldoTotal: this.saldoConta,
+            valor: 0,
+            isSaldo: true,
+          });
+          this.dataSource = new MatTableDataSource(lancFiltrados);
         });
     }
   }
