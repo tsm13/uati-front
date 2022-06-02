@@ -2,8 +2,11 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { parse, differenceInDays } from 'date-fns';
 import { FiltroService } from 'src/app/shared/services/filtro.service';
-import { ConteudoFiltro } from 'src/app/interfaces/conteudo-filtro';
-import { ListaExtrato, ModuloListaExtrato } from 'src/app/interfaces/extrato';
+import { ConteudoFiltro } from 'src/app/shared/interfaces/conteudo-filtro';
+import {
+  ListaExtrato,
+  ModuloListaExtrato,
+} from 'src/app/shared/interfaces/extrato';
 import { BackendService } from 'src/app/shared/services/backend.service';
 
 @Component({
@@ -38,7 +41,6 @@ export class MatTabelaComponent implements OnInit {
         this.dadosFiltro = observer;
         this.periodoDias = this.dadosFiltro.periodo;
 
-        // let saldoAnterior = this.saldoAnterior;
         let filtrados = this.dados.dados.filter((lancamento: ListaExtrato) => {
           let dias = this.periodoEmDias(this.periodoDias);
           let difDias = differenceInDays(
@@ -152,7 +154,6 @@ export class MatTabelaComponent implements OnInit {
               ) < 90
           );
 
-          // let saldoDoDia = todosLanc[todosLanc.length - 1];
           lancFiltrados.splice(0, 0, {
             dataLancamento: todosLanc[todosLanc.length - 1].dataLancamento,
             detalhes: '',

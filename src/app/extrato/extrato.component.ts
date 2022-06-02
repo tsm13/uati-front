@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { BackendService } from 'src/app/shared/services/backend.service';
-import { ModuloListaExtrato } from 'src/app/interfaces/extrato';
+import { ModuloListaExtrato } from 'src/app/shared/interfaces/extrato';
 
 import { FiltroService } from 'src/app/shared/services/filtro.service';
-import { ConteudoFiltro } from 'src/app/interfaces/conteudo-filtro';
+import { ConteudoFiltro } from 'src/app/shared/interfaces/conteudo-filtro';
 
 @Component({
   selector: 'app-extrato',

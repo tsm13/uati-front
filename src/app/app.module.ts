@@ -4,11 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AtualizadoComponent } from './shared/extrato/atualizado/atualizado.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SaldoComponent } from './saldo/saldo.component';
-import { MatTabelaComponent } from './shared/extrato/mat-tabela/mat-tabela.component';
-import { RodapeComponent } from './rodape/rodape.component';
+import { ExtratoComponent } from './extrato/extrato.component';
+import { AtualizadoComponent } from './extrato/atualizado/atualizado.component';
+import { MatTabelaComponent } from './extrato/mat-tabela/mat-tabela.component';
+import { RodapeComponent } from './shared/rodape/rodape.component';
 
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,7 +25,7 @@ import { LOCALE_ID } from '@angular/core';
 import { DEFAULT_CURRENCY_CODE } from '@angular/core';
 import ptBr from '@angular/common/locales/pt';
 import { DatePipe, registerLocaleData } from '@angular/common';
-import { ExtratoComponent } from './shared/extrato/extrato.component';
+
 import { FormsModule } from '@angular/forms';
 import { BackendService } from './shared/services/backend.service';
 import { FiltroService } from './shared/services/filtro.service';

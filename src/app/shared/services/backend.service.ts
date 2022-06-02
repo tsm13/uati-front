@@ -2,12 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { parse } from 'date-fns';
 import { map, Observable } from 'rxjs';
-import {
-  ContaCorrente,
-  VerContaCorrente,
-} from '../../interfaces/conta-corrente';
-import { Extrato, ModuloListaExtrato } from '../../interfaces/extrato';
-import { Saldo, SaldoTotal } from '../../interfaces/saldo';
+import { ContaCorrente, VerContaCorrente } from '../interfaces/conta-corrente';
+import { Extrato, ModuloListaExtrato } from '../interfaces/extrato';
+import { Saldo, SaldoTotal } from '../interfaces/saldo';
 
 @Injectable({
   providedIn: 'root',

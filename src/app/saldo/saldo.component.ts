@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BackendService } from '../shared/services/backend.service';
-import { SaldoTotal } from '../interfaces/saldo';
+import { SaldoTotal } from '../shared/interfaces/saldo';
 
 @Component({
   selector: 'app-saldo',

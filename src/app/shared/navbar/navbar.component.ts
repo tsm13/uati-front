@@ -1,6 +1,6 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BackendService } from '../shared/services/backend.service';
+import { BackendService } from '../services/backend.service';
 import { VerContaCorrente } from '../interfaces/conta-corrente';
 
 @Component({
