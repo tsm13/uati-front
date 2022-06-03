@@ -26,6 +26,7 @@ import { DEFAULT_CURRENCY_CODE } from '@angular/core';
 import ptBr from '@angular/common/locales/pt';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TelaErroComponent } from './shared/tela-erro/tela-erro.component';
 
 registerLocaleData(ptBr);
 
@@ -38,6 +39,7 @@ registerLocaleData(ptBr);
     RodapeComponent,
     AtualizadoComponent,
     ExtratoComponent,
+    TelaErroComponent,
   ],
 
   imports: [
