@@ -122,7 +122,7 @@ export class ExtratoComponent {
         this.mostrarSaidasFuturas = false;
         this.mostrarEntradasSaidas = true;
         break;
-      case 'saidas':
+      case 'saídas':
         this.mostrarEntradasFuturas = false;
         this.mostrarSaidasFuturas = true;
         this.mostrarEntradasSaidas = true;

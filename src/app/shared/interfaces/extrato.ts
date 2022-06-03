@@ -12,7 +12,7 @@ export interface ListaExtrato {
   saldoTotal: number;
   futuroOuPassado: string;
   entradaOuSaida: string;
-  isSaldo: boolean;
+  isSaldo?: boolean;
 }
 
 export interface ModuloListaExtrato {
