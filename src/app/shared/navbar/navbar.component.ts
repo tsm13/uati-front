@@ -1,7 +1,7 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BackendService } from '../services/backend.service';
 import { VerContaCorrente } from '../interfaces/conta-corrente';
+import { ContaCorrenteService } from '../services/conta-corrente.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +9,7 @@ import { VerContaCorrente } from '../interfaces/conta-corrente';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private service: BackendService) {}
+  constructor(private ccService: ContaCorrenteService) {}
   verCC: Observable<VerContaCorrente>;
 
   ngOnInit(): void {
@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
   }
 
   verContaCorrente() {
-    this.verCC = this.service.mostraContaCorrente({
+    this.verCC = this.ccService.mostraContaCorrente({
       agencia: '0123',
       conta: '00587',
       dac: '1',

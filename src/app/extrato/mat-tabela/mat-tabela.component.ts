@@ -7,7 +7,7 @@ import {
   ListaExtrato,
   ModuloListaExtrato,
 } from 'src/app/shared/interfaces/extrato';
-import { BackendService } from 'src/app/shared/services/backend.service';
+import { SaldoService } from 'src/app/shared/services/saldo.service';
 
 @Component({
   selector: 'mat-tabela',
@@ -33,7 +33,7 @@ export class MatTabelaComponent implements OnInit {
 
   constructor(
     private filtroService: FiltroService,
-    private backendService: BackendService
+    private saldoService: SaldoService
   ) {
     this.filtroService.data.subscribe((observer: any) => {
       if (observer && this.dados && this.filtrar) {
@@ -121,7 +121,7 @@ export class MatTabelaComponent implements OnInit {
     this.dataSource = new MatTableDataSource(dados.dados);
 
     if (this.exibirSaldo) {
-      this.backendService
+      this.saldoService
         .mostraSaldo({
           agencia: '0123',
           conta: '01234',

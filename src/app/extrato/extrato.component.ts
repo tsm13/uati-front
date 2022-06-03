@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { BackendService } from 'src/app/shared/services/backend.service';
 import { ModuloListaExtrato } from 'src/app/shared/interfaces/extrato';
-
 import { FiltroService } from 'src/app/shared/services/filtro.service';
 import { ConteudoFiltro } from 'src/app/shared/interfaces/conteudo-filtro';
+import { ExtratoService } from '../shared/services/extrato.service';
 
 @Component({
   selector: 'app-extrato',
@@ -26,12 +25,12 @@ export class ExtratoComponent {
   };
 
   constructor(
-    private service: BackendService,
+    private extratoService: ExtratoService,
     private filtroService: FiltroService
   ) {}
 
   ngOnInit(): void {
-    this.entradasSaidas = this.service
+    this.entradasSaidas = this.extratoService
       .mostraExtrato({
         agencia: '0123',
         conta: '00587',
@@ -51,7 +50,7 @@ export class ExtratoComponent {
         })
       );
 
-    this.entradasFuturas = this.service
+    this.entradasFuturas = this.extratoService
       .mostraExtrato({
         agencia: '0123',
         conta: '00587',
@@ -73,7 +72,7 @@ export class ExtratoComponent {
         })
       );
 
-    this.saidasFuturas = this.service
+    this.saidasFuturas = this.extratoService
       .mostraExtrato({
         agencia: '0123',
         conta: '00587',

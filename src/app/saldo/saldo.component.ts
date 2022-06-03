@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BackendService } from '../shared/services/backend.service';
 import { SaldoTotal } from '../shared/interfaces/saldo';
+import { SaldoService } from '../shared/services/saldo.service';
 
 @Component({
   selector: 'app-saldo',
@@ -9,7 +9,7 @@ import { SaldoTotal } from '../shared/interfaces/saldo';
   styleUrls: ['./saldo.component.scss'],
 })
 export class SaldoComponent implements OnInit {
-  constructor(private service: BackendService) {}
+  constructor(private saldoService: SaldoService) {}
   saldoTotal: Observable<SaldoTotal>;
 
   ngOnInit() {
@@ -24,7 +24,7 @@ export class SaldoComponent implements OnInit {
   }
 
   public verSaldo() {
-    this.saldoTotal = this.service.mostraSaldo({
+    this.saldoTotal = this.saldoService.mostraSaldo({
       agencia: '0123',
       conta: '01234',
       dac: '0',

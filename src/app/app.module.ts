@@ -25,10 +25,7 @@ import { LOCALE_ID } from '@angular/core';
 import { DEFAULT_CURRENCY_CODE } from '@angular/core';
 import ptBr from '@angular/common/locales/pt';
 import { DatePipe, registerLocaleData } from '@angular/common';
-
 import { FormsModule } from '@angular/forms';
-import { BackendService } from './shared/services/backend.service';
-import { FiltroService } from './shared/services/filtro.service';
 
 registerLocaleData(ptBr);
 
@@ -63,8 +60,6 @@ registerLocaleData(ptBr);
     DatePipe,
     { provide: LOCALE_ID, useValue: 'pt-Br' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
-    BackendService,
-    FiltroService,
   ],
   bootstrap: [AppComponent],
 })

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BackendService } from './backend.service';
+import { ContaCorrenteService } from './conta-corrente.service';
 
-describe('BackendService', () => {
-  let service: BackendService;
+describe('ContaCorrenteService', () => {
+  let service: ContaCorrenteService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(BackendService);
+    service = TestBed.inject(ContaCorrenteService);
   });
 
   it('should be created', () => {
