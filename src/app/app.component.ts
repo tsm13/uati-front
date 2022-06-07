@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'itau';
+  mostrarTelaErro: any;
+
+  mostrarTelaDeErro(erro: Event) {
+    this.mostrarTelaErro = true;
+  }
 }

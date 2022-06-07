@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ModuloListaExtrato } from 'src/app/shared/interfaces/extrato';
 import { FiltroService } from 'src/app/shared/services/filtro.service';
@@ -108,7 +108,7 @@ export class ExtratoComponent {
     this.conteudoFiltro.visualizar = visualizar
       ? visualizar
       : this.conteudoFiltro.visualizar;
-    this.visualizar = this.conteudoFiltro.visualizar;
+    //this.visualizar = this.conteudoFiltro.visualizar;
     this.busca = this.conteudoFiltro.busca;
     this.periodo = this.conteudoFiltro.periodo;
     this.filtroService.filtrar(this.conteudoFiltro);

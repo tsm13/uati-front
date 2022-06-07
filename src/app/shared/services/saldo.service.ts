@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { EventEmitter, Injectable, Output } from '@angular/core';
+import { catchError, Observable } from 'rxjs';
 import { Saldo, SaldoTotal } from '../interfaces/saldo';
 
 @Injectable({

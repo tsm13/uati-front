@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { catchError, Observable, throwError } from 'rxjs';
 import { SaldoTotal } from '../shared/interfaces/saldo';
 import { SaldoService } from '../shared/services/saldo.service';
 
@@ -10,6 +10,7 @@ import { SaldoService } from '../shared/services/saldo.service';
 })
 export class SaldoComponent implements OnInit {
   constructor(private saldoService: SaldoService) {}
+  @Output() onError = new EventEmitter<any>();
   saldoTotal: Observable<SaldoTotal>;
 
   ngOnInit() {
@@ -24,11 +25,18 @@ export class SaldoComponent implements OnInit {
   }
 
   public verSaldo() {
-    this.saldoTotal = this.saldoService.mostraSaldo({
-      agencia: '0123',
-      conta: '01234',
-      dac: '0',
-    });
+    this.saldoTotal = this.saldoService
+      .mostraSaldo({
+        agencia: '0123',
+        conta: '01234',
+        dac: '0',
+      })
+      .pipe(
+        catchError((err) => {
+          this.onError.emit(err);
+          return throwError(() => new Error(err));
+        })
+      );
     return this.saldoTotal;
   }
 }
