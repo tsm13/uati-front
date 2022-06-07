@@ -108,7 +108,6 @@ export class ExtratoComponent {
     this.conteudoFiltro.visualizar = visualizar
       ? visualizar
       : this.conteudoFiltro.visualizar;
-    //this.visualizar = this.conteudoFiltro.visualizar;
     this.busca = this.conteudoFiltro.busca;
     this.periodo = this.conteudoFiltro.periodo;
     this.filtroService.filtrar(this.conteudoFiltro);
